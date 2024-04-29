@@ -2,5 +2,5 @@
 
 public class Releve
 {
-    
+    public int ReleveId { get; set; }
 }
