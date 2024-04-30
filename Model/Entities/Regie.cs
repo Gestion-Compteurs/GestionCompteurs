@@ -7,4 +7,5 @@ public class Regie
     public int RegieId { get; set; }
     [Required]
     public string NomRegion { get; set; }
+    public IEnumerable<Administrateur> Administrateurs { get; set; } = new List<Administrateur>();
 }

@@ -1,0 +1,77 @@
+﻿using GestionCompteursElectriquesMoyenneTension.Data;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+using GestionCompteursElectriquesMoyenneTension.Model.Entities;
+using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
+using Microsoft.AspNetCore.Mvc;
+
+namespace GestionCompteursElectriquesMoyenneTension.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class CompteurController : ControllerBase
+{
+    private readonly ICompteurRepository _compteurRepository;
+    private readonly ApplicationDbContext _context;
+    private readonly ILogger<CompteurController> _logger;
+
+    public CompteurController(ICompteurRepository compteurRepository,ApplicationDbContext context, ILogger<CompteurController> logger)
+    {
+        _compteurRepository = compteurRepository;
+        _logger = logger;
+        _context = context;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllCompteurs()
+    {
+        IEnumerable<Compteur> compteurs = await _compteurRepository.GetAllAsync();
+        foreach (var compteur in compteurs)
+        {
+            compteur.ToCompteurDto();
+        }
+        return Ok(compteurs);
+        
+    }
+
+
+    [HttpGet("{id:int:min(1):max(50)}")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> GetCompteurById([FromRoute] int id)
+    {
+        var compteurs = await _compteurRepository.GetByIdAsync(id);
+        if (compteurs != null) return Ok(compteurs.ToCompteurDto());
+        return NotFound();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateCompteur([FromBody] CreateCompteurRequestDto compteurDto)
+    {
+        var compteurModel = compteurDto.ToCompteurFromCreateDto();
+        await _compteurRepository.CreateAsync(compteurModel);
+        return CreatedAtAction(nameof(GetCompteurById), new { id = compteurModel.CompteurId, }, compteurModel.ToCompteurDto());
+    }
+    
+    [HttpPut]
+    [Route("{id:int:min(1)}")]
+    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCompteurRequestDto updateDto)
+    {
+        var compteurModel = await _compteurRepository.UpdateAsync(id, updateDto);
+        if (compteurModel == null)
+        {
+            return NotFound();
+        }
+        return Ok(compteurModel.ToCompteurDto());
+    }
+
+    [HttpDelete("{id:int}")]
+    public IActionResult Delete([FromRoute] int id)
+    {
+        var compteurModel = _compteurRepository.DeleteAsync(id);
+        if (compteurModel == null)
+            return NotFound();
+        return NoContent();
+    }
+    
+}

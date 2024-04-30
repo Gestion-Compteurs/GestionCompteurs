@@ -23,9 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
-      <Folder Include="Model\DTOs\" />
-      <Folder Include="Model\Enumerations\" />
       <Folder Include="Security\Controllers\" />
       <Folder Include="Security\Model\DTOs\" />
       <Folder Include="Security\Model\Entities\" />
