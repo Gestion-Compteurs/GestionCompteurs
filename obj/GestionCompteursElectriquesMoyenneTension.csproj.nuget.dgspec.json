@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj": {}
+    "C:\\Users\\Housseini\\Desktop\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj": {}
   },
   "projects": {
-    "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj": {
+    "C:\\Users\\Housseini\\Desktop\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj",
+        "projectUniqueName": "C:\\Users\\Housseini\\Desktop\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj",
         "projectName": "GestionCompteursElectriquesMoyenneTension",
-        "projectPath": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj",
-        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\obj\\",
+        "projectPath": "C:\\Users\\Housseini\\Desktop\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj",
+        "packagesPath": "C:\\Users\\Housseini\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Housseini\\Desktop\\GestionCompteurs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Housseini\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[8.0.4, )"
             },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -88,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

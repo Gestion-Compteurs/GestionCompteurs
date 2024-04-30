@@ -1,5 +1,10 @@
-var builder = WebApplication.CreateBuilder(args);
+using GestionCompteursElectriquesMoyenneTension.Data;
+using Microsoft.EntityFrameworkCore;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options => options.UseSqlite(
+        builder.Configuration.GetConnectionString("sqlitedb")));
 var iServiceCollection = builder.Services;
 // Add services to the container.
 
