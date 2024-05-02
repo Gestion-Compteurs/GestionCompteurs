@@ -9,6 +9,7 @@ public static class CompteurMapper
     {
         return new CompteurDto
         {
+            CompteurId = compteurModel.CompteurId,
             Modele = compteurModel.Modele,
             Marque = compteurModel.Marque,
             VoltageMax = compteurModel.VoltageMax,

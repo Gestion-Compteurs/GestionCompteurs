@@ -13,8 +13,8 @@ public class Compteur
     public int AnneeCreation { get; set; } = 0;
     
     public int VoltageMax { get; set; }
-    public IEnumerable<Cadran> Cadrans { get; set; }
-    public IEnumerable<InstanceCompteur> InstanceCompteurs { get; set; } 
+    public IEnumerable<Cadran> Cadrans { get; set; } = new List<Cadran>();
+    public IEnumerable<InstanceCompteur> InstanceCompteurs { get; set; } = new List<InstanceCompteur>();
 
     /*
      Deplacer vers le controlleur

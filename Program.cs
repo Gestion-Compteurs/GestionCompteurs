@@ -1,4 +1,7 @@
+using GestionBatimentsElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Data;
+using GestionCompteursElectriquesMoyenneTension.Model.Entities;
+using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +15,11 @@ iServiceCollection.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 iServiceCollection.AddEndpointsApiExplorer();
 iServiceCollection.AddSwaggerGen();
+
+
+builder.Services.AddScoped<ICompteurRepository, CompteurRepository>();
+builder.Services.AddScoped<IBatimentRepository, BatimentRepository>();
+builder.Services.AddScoped<IInstanceCompteurRepository, InstanceCompteurRepository>();
 
 
 var app = builder.Build();

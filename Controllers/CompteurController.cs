@@ -35,9 +35,7 @@ public class CompteurController : ControllerBase
     }
 
 
-    [HttpGet("{id:int:min(1):max(50)}")]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [HttpGet("{id:int:min(1)}")]
     public async Task<IActionResult> GetCompteurById([FromRoute] int id)
     {
         var compteurs = await _compteurRepository.GetByIdAsync(id);
@@ -65,7 +63,7 @@ public class CompteurController : ControllerBase
         return Ok(compteurModel.ToCompteurDto());
     }
 
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id:int:min(1)}")]
     public IActionResult Delete([FromRoute] int id)
     {
         var compteurModel = _compteurRepository.DeleteAsync(id);
