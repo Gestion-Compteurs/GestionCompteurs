@@ -7,6 +7,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Data;
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
     public DbSet<Compteur> Compteurs { get; set; }
+    public DbSet<InstanceCompteur> InstanceCompteurs { get; set; }
     public DbSet<Batiment> Batiments { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

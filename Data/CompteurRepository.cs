@@ -14,12 +14,12 @@ public class CompteurRepository:ICompteurRepository
         }
         public async Task<List<Compteur>> GetAllAsync()
         {
-            return await _context.Compteurs.ToListAsync();
+            return await _context.Compteurs.Include(c=>c.InstanceCompteurs).ToListAsync();
         }
 
         public async Task<Compteur?> GetByIdAsync(int id)
         {
-            return await _context.Compteurs.FirstOrDefaultAsync(x=>x.CompteurId==id);
+            return await _context.Compteurs.Include(c=>c.InstanceCompteurs).FirstOrDefaultAsync(x=>x.CompteurId==id);
         }
 
         public async Task<Compteur> CreateAsync(Compteur compteurModel)
