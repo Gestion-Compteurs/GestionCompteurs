@@ -10,4 +10,7 @@ public class InstanceCompteur
     public int BatimentId { get; set; }
     [Required]
     public DateOnly DateInstallation { get; set; }
+
+    public IEnumerable<Cadran> Cadrans { get; set; } = new List<Cadran>();
+    
 }

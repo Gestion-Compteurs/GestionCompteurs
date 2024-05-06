@@ -1,4 +1,6 @@
 using GestionBatimentsElectriquesMoyenneTension.Data;
+using GestionCadransElectriquesMoyenneTension.Data;
+using GestionCadransElectriquesMoyenneTension.Model.Interfaces;
 using GestionCompteursElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
@@ -18,8 +20,10 @@ iServiceCollection.AddSwaggerGen();
 
 
 builder.Services.AddScoped<ICompteurRepository, CompteurRepository>();
+builder.Services.AddScoped<ICadranRepository, CadranRepository>();
 builder.Services.AddScoped<IBatimentRepository, BatimentRepository>();
 builder.Services.AddScoped<IInstanceCompteurRepository, InstanceCompteurRepository>();
+builder.Services.AddScoped<IInstanceCadranRepository, InstanceCadranRepository>();
 
 
 var app = builder.Build();

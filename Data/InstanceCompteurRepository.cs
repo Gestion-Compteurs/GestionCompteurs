@@ -19,7 +19,7 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
 
     public async Task<InstanceCompteur?> GetByIdAsync(int id)
     {
-        var instanceCompteur = await _context.InstanceCompteurs.FirstOrDefaultAsync(c=>c.InstanceCompteurId == id);
+        var instanceCompteur = await _context.InstanceCompteurs.Include(c=>c.Cadrans).FirstOrDefaultAsync(c=>c.InstanceCompteurId == id);
         return instanceCompteur ;
     }
 
