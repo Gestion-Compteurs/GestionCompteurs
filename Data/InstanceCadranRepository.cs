@@ -1,9 +1,9 @@
-﻿using GestionCadransElectriquesMoyenneTension.Model.Interfaces;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using GestionCompteursElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GestionCadransElectriquesMoyenneTension.Data;
+namespace GestionCompteursElectriquesMoyenneTension.Data;
 
 
 public class InstanceCadranRepository:IInstanceCadranRepository

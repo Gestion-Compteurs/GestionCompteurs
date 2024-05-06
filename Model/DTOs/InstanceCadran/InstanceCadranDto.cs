@@ -4,5 +4,6 @@ public class InstanceCadranDto
 {
     public int CadranId { get; set; }
     public int InstanceCadranId { get; set;}
+    public int InstanceCompteurId { get; set;}
     public int IndexRoues { get; set;}
 }

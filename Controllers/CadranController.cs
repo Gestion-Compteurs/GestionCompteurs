@@ -1,11 +1,11 @@
-﻿using GestionCadransElectriquesMoyenneTension.Model.Mappers;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 using GestionCompteursElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Cadran;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GestionCadransElectriquesMoyenneTension.Controllers;
+namespace GestionCompteursElectriquesMoyenneTension.Controllers;
 
 
 [ApiController]

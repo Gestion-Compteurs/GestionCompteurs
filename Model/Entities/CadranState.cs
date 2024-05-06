@@ -1,6 +1,11 @@
 ﻿namespace GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
-public record CadranState
+public record ReleveCadran
 {
-    
+    public int IndexRoues;
+    // continue here
+    public ReleveCadran(int indexRoues)
+    {
+        IndexRoues = indexRoues;
+    }
 }

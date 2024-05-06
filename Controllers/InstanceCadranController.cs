@@ -1,10 +1,8 @@
-﻿using GestionCadransElectriquesMoyenneTension.Model.Interfaces;
-using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCadran;
-using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GestionCadransElectriquesMoyenneTension.Controllers;
+namespace GestionCompteursElectriquesMoyenneTension.Controllers;
 
 
 [ApiController]
@@ -40,7 +38,8 @@ public class InstanceCadranController:ControllerBase
         return Ok(dtoInstanceCadran);
     }
     
-    [HttpPost]
+    /*
+     [HttpPost]
     [Route("{cadranId:int:min(1)}")]
     public async Task<IActionResult> Create([FromRoute] int cadranId,CreateInstanceCadranRequestDto createInstanceCadranDto)
     {
@@ -50,6 +49,6 @@ public class InstanceCadranController:ControllerBase
         if (creation != null) return CreatedAtAction(nameof(GetById), new { id = creation.InstanceCadranId }, creation.ToInstanceCadranDto());
         return StatusCode(500);
 
-    }
+    }*/
     
 }

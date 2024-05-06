@@ -1,7 +1,7 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Cadran;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
-namespace GestionCadransElectriquesMoyenneTension.Model.Mappers;
+namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 
 public static class CadranMapper
 {

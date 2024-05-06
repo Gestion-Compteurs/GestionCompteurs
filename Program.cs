@@ -1,8 +1,5 @@
 using GestionBatimentsElectriquesMoyenneTension.Data;
-using GestionCadransElectriquesMoyenneTension.Data;
-using GestionCadransElectriquesMoyenneTension.Model.Interfaces;
 using GestionCompteursElectriquesMoyenneTension.Data;
-using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

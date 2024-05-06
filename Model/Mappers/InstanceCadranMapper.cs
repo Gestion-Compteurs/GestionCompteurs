@@ -11,7 +11,8 @@ public static class InstanceCadranMapper
         {
             InstanceCadranId = instanceCadranModel.InstanceCadranId,
             IndexRoues = instanceCadranModel.IndexRoues,
-            CadranId = instanceCadranModel.CadranId
+            CadranId = instanceCadranModel.CadranId,
+            InstanceCompteurId = instanceCadranModel.InstanceCompteurId
         };
     }
     public static InstanceCadran ToInstanceCadranFromCreateDto(
@@ -21,7 +22,8 @@ public static class InstanceCadranMapper
         return new InstanceCadran
         {
             CadranId = cadranId,
-            IndexRoues = 0
+            IndexRoues = 0,
+            InstanceCompteurId = instanceCadranModel.InstanceCompteurId
         };
     }
 }

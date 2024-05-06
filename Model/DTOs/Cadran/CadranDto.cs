@@ -1,4 +1,6 @@
-﻿namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Cadran;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.Entities;
+
+namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Cadran;
 
 public class CadranDto
 {
@@ -7,5 +9,5 @@ public class CadranDto
     public float PrixMetreCube { get; set; }
     public TimeOnly HeureActivation { get; set; }
     public TimeOnly HeureArret { get; set; }
-    public string CadranModel { get; set; }
+    public string CadranModel { get; set; } = Constants.UnknownString;
 }

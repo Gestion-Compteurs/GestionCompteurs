@@ -1,6 +1,6 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
-namespace GestionCadransElectriquesMoyenneTension.Model.Interfaces;
+namespace GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 
 
 public interface IInstanceCadranRepository

@@ -14,12 +14,13 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
     
     public async Task<List<InstanceCompteur>> GetAllAsync()
     {
-        return await _context.InstanceCompteurs.AsNoTracking().ToListAsync();
+        // return await _context.InstanceCompteurs.Include(c=>c.InstanceCadrans).AsNoTracking().ToListAsync();//did not include cadrans instances here
+        return await _context.InstanceCompteurs.Include(c=>c.InstanceCadrans).ToListAsync();//did not include cadrans instances here
     }
 
     public async Task<InstanceCompteur?> GetByIdAsync(int id)
     {
-        var instanceCompteur = await _context.InstanceCompteurs.Include(c=>c.Cadrans).FirstOrDefaultAsync(c=>c.InstanceCompteurId == id);
+        var instanceCompteur = await _context.InstanceCompteurs.Include(c=>c.InstanceCadrans).FirstOrDefaultAsync(c=>c.InstanceCompteurId == id);
         return instanceCompteur ;
     }
 
@@ -30,4 +31,14 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
         await _context.SaveChangesAsync();
         return instanceCompteurModel;
     }
+
+    public async Task<bool> InstanceCompteurExists(int id)
+    {
+        return await _context.InstanceCompteurs.AnyAsync(s => s.InstanceCompteurId == id);
+    }
+
+    /*public async Task<InstanceCompteur?> CreateInstanceCadranAsync(InstanceCadran commentModel)
+    {
+        throw new NotImplementedException();
+    }*/
 }

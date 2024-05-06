@@ -5,8 +5,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Entities;
 public class Cadran
 {
     public int CadranId { get; set; }
-    [Required]
-    public string CadranModel { get; set; }
+    [Required] public string CadranModel { get; set; } = Constants.UnknownString;
     [Required]
     public int NombreRoues { get; set; }
     public float PrixMetreCube { get; set; }

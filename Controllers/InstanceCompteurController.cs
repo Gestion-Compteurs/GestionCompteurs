@@ -1,5 +1,6 @@
-﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
-using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCadran;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
 using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,23 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
 public class InstanceCompteurController:ControllerBase
 {
     private readonly IInstanceCompteurRepository _instanceCompteurRepository;
+    private readonly IInstanceCadranRepository _instanceCadranRepository;
     private readonly ICompteurRepository _compteurRepository;
+    private readonly ICadranRepository _cadranRepository;
     private readonly IBatimentRepository _batimentRepository;
-    public InstanceCompteurController(IInstanceCompteurRepository instanceCompteurRepository,ICompteurRepository compteurRepository,IBatimentRepository batimentRepository)
+    public InstanceCompteurController(
+        IInstanceCadranRepository instanceCadranRepository,
+        IInstanceCompteurRepository instanceCompteurRepository,
+        ICompteurRepository compteurRepository,
+        IBatimentRepository batimentRepository,
+        ICadranRepository cadranRepository
+        )
     {
         _instanceCompteurRepository = instanceCompteurRepository;
         _compteurRepository = compteurRepository;
+        _cadranRepository = cadranRepository;
         _batimentRepository = batimentRepository;
+        _instanceCadranRepository = instanceCadranRepository;
     }
 
     
@@ -53,4 +64,18 @@ public class InstanceCompteurController:ControllerBase
 
     }
     
+    [HttpPost]
+    [Route("AjoutCadran/{cadranId:int:min(1)}")]
+    public async Task<IActionResult> Create([FromRoute] int cadranId,[FromBody] CreateInstanceCadranRequestDto createInstanceCadranDto)
+    {
+        if  (! await _cadranRepository.CadranExists(cadranId)) return NotFound("Cadran not found");
+        if  (! await _instanceCompteurRepository.InstanceCompteurExists(createInstanceCadranDto.InstanceCompteurId)) return NotFound("Instance of Compteur not found");
+        
+        // var instanceCadran = createInstanceCadranDto.ToInstanceCadranFromCreateDto(cadranId: cadranId,instanceCompteurId:createInstanceCadranDto.InstanceCompteurId);
+        
+        var instanceCadran = createInstanceCadranDto.ToInstanceCadranFromCreateDto(cadranId: cadranId);
+        var creation = await _instanceCadranRepository.CreateAsync(instanceCadran);
+        if (creation != null) return CreatedAtAction(nameof(GetById), new { id = creation.InstanceCadranId }, creation.ToInstanceCadranDto());
+        return StatusCode(500);
+    }
 }
