@@ -1,4 +1,6 @@
-﻿namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
+
+namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs;
 
 public class CompteurDto
 {
@@ -7,4 +9,5 @@ public class CompteurDto
     public string Modele { get; set; } = string.Empty;
     public int AnneeCreation { get; set; } = 0;
     public int VoltageMax { get; set; } = 0;
+    public IEnumerable<InstanceCompteurDto> InstanceCompteursDtos { get; set; } = new List<InstanceCompteurDto>();
 }

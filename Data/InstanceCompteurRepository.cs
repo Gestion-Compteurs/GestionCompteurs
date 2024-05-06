@@ -15,7 +15,8 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
     public async Task<List<InstanceCompteur>> GetAllAsync()
     {
         // return await _context.InstanceCompteurs.Include(c=>c.InstanceCadrans).AsNoTracking().ToListAsync();//did not include cadrans instances here
-        return await _context.InstanceCompteurs.Include(c=>c.InstanceCadrans).ToListAsync();//did not include cadrans instances here
+         var instanceCompteurs = await _context.InstanceCompteurs.Include(c=>c.InstanceCadrans).ToListAsync();//did not include cadrans instances here
+         return instanceCompteurs;
     }
 
     public async Task<InstanceCompteur?> GetByIdAsync(int id)

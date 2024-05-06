@@ -9,6 +9,7 @@ public class InstanceCadran
     public int InstanceCadranId { get; set; }
     [Required,ForeignKey("InstanceCompteur")] //TODO: why I have to force ?
     public int InstanceCompteurId { get; set; }
+    // public InstanceCompteur? InstanceCompteur { get; set; }
     [Required]
     public int CadranId { get; set; }
     public int IndexRoues { get; set; } // calculer le prix avec les params cadrans

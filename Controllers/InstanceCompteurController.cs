@@ -37,8 +37,17 @@ public class InstanceCompteurController:ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var instanceCompteurs = await _instanceCompteurRepository.GetAllAsync();
-        var dtoInstanceCompteurs = instanceCompteurs.Select(c => c.ToInstanceCompteurDto());
-        return Ok(dtoInstanceCompteurs);
+        Console.WriteLine(instanceCompteurs);
+        // var dtoInstanceCompteurs = instanceCompteurs.Select(c => c.ToInstanceCompteurDto());//complexify results and chop things, use debugger
+        //select must use things that works like include, I guess
+        // Console.WriteLine(dtoInstanceCompteurs);
+        foreach (var compteur in instanceCompteurs)
+        {
+            compteur.ToInstanceCompteurDto();
+        }
+
+        Console.WriteLine(instanceCompteurs);
+        return Ok(instanceCompteurs);
     }
     
     [Route("{id:int:min(1)}")]
@@ -47,13 +56,16 @@ public class InstanceCompteurController:ControllerBase
     {
         var instanceCompteur = await _instanceCompteurRepository.GetByIdAsync(id);
         if (instanceCompteur == null) return NotFound();
+        Console.WriteLine(instanceCompteur);
         var dtoInstanceCompteur = instanceCompteur.ToInstanceCompteurDto();
+        Console.WriteLine(dtoInstanceCompteur);
         return Ok(dtoInstanceCompteur);
     }
     
     [HttpPost]
     [Route("{compteurId:int:min(1)}/{batimentId:int:min(1)}")]
-    public async Task<IActionResult> Create([FromRoute] int compteurId,[FromRoute] int batimentId,CreateInstanceCompteurRequestDto createInstanceCompteurDto)
+    public async Task<IActionResult> Create([FromRoute] int compteurId, [FromRoute] int batimentId,
+        CreateInstanceCompteurRequestDto createInstanceCompteurDto)
     {
         if  (! await _compteurRepository.CompteurExists(compteurId)) return NotFound("Compteur not found");
         if  (! await _batimentRepository.BatimentExists(batimentId)) return NotFound("Batiment not found");
@@ -61,7 +73,6 @@ public class InstanceCompteurController:ControllerBase
         var creation = await _instanceCompteurRepository.CreateAsync(instanceCompteur);
         if (creation != null) return CreatedAtAction(nameof(GetById), new { id = creation.InstanceCompteurId }, creation.ToInstanceCompteurDto());
         return StatusCode(500);
-
     }
     
     [HttpPost]

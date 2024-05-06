@@ -12,14 +12,14 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
 public class CompteurController : ControllerBase
 {
     private readonly ICompteurRepository _compteurRepository;
-    private readonly ApplicationDbContext _context;
+    // private readonly ApplicationDbContext _context;
     private readonly ILogger<CompteurController> _logger;
 
     public CompteurController(ICompteurRepository compteurRepository,ApplicationDbContext context, ILogger<CompteurController> logger)
     {
         _compteurRepository = compteurRepository;
         _logger = logger;
-        _context = context;
+        // _context = context;
     }
 
     [HttpGet]
