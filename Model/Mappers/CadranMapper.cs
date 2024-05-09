@@ -11,7 +11,7 @@ public static class CadranMapper
         {
             CadranId = cadranModel.CadranId,
             NombreRoues = cadranModel.NombreRoues,
-            PrixMetreCube = cadranModel.PrixMetreCube,
+            PrixWatt = cadranModel.PrixWatt,
             HeureArret = cadranModel.HeureArret,
             HeureActivation = cadranModel.HeureActivation,
             CadranModel = cadranModel.CadranModel,
@@ -23,7 +23,7 @@ public static class CadranMapper
         return new Cadran
         {
             NombreRoues = cadranDto.NombreRoues,
-            PrixMetreCube = cadranDto.PrixMetreCube,
+            PrixWatt = cadranDto.PrixWatt,
             HeureArret = cadranDto.HeureArret,
             HeureActivation = cadranDto.HeureActivation,
             CadranModel = cadranDto.CadranModel

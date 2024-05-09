@@ -13,6 +13,11 @@ public class InstanceCompteur
     public DateOnly DateInstallation { get; set; }
 
     public IEnumerable<InstanceCadran> InstanceCadrans { get; set; } = new List<InstanceCadran>();
-    
+    public IEnumerable<Releve> Releves { get; set; } = new List<Releve>();
+
+    // public Facture MakeFacture()
+    // {
+    //     return null;
+    // }
     
 }

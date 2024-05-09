@@ -21,6 +21,7 @@ builder.Services.AddScoped<ICadranRepository, CadranRepository>();
 builder.Services.AddScoped<IBatimentRepository, BatimentRepository>();
 builder.Services.AddScoped<IInstanceCompteurRepository, InstanceCompteurRepository>();
 builder.Services.AddScoped<IInstanceCadranRepository, InstanceCadranRepository>();
+builder.Services.AddScoped<IReleveCadranRepository, ReleveCadranRepository>();
 
 
 var app = builder.Build();

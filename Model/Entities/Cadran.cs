@@ -8,13 +8,13 @@ public class Cadran
     [Required] [MaxLength(50)] public string CadranModel { get; set; } = Constants.UnknownString;
     [Required]
     public int NombreRoues { get; set; }
-    public float PrixMetreCube { get; set; }
+    public double PrixWatt { get; set; }
     public TimeOnly HeureActivation { get; set; }
     public TimeOnly HeureArret { get; set; }
     public IEnumerable<InstanceCadran> InstancesCadran { get; set; } = new List<InstanceCadran>();
     
-    public double GetMontantAPayerCadran()
-    {
-        return 0.0f;
-    }
+    // public double GetMontantAPayerCadran()
+    // {
+    //     return 0.0f;
+    // }
 }

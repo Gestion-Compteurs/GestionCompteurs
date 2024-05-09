@@ -36,7 +36,7 @@ public class CadranRepository:ICadranRepository
         cadranModel.HeureActivation = updateDto.HeureActivation;
         cadranModel.HeureArret = updateDto.HeureArret;
         cadranModel.NombreRoues = updateDto.NombreRoues;
-        cadranModel.PrixMetreCube = updateDto.PrixMetreCube;
+        cadranModel.PrixWatt = updateDto.PrixWatt;
      
         
         await _context.SaveChangesAsync();

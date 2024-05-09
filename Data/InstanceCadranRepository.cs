@@ -32,4 +32,9 @@ public class InstanceCadranRepository:IInstanceCadranRepository
         await _context.SaveChangesAsync();
         return instanceCadranModel;
     }
+
+    public async Task<bool> InstanceCadranExists(int id)
+    {
+        return await _context.InstanceCadrans.AnyAsync(s => s.InstanceCadranId == id);
+    }
 }

@@ -12,11 +12,11 @@ public class InstanceCadran
     // public InstanceCompteur? InstanceCompteur { get; set; }
     [Required]
     public int CadranId { get; set; }
-    public int IndexRoues { get; set; } // calculer le prix avec les params cadrans
     // public Cadran Cadran { get; set; } // le cadran donne ses paramètres
-    
-    public ReleveCadran GetReleveCadran()
-    {
-        return new ReleveCadran(IndexRoues);
-    }
+    public int IndexRoues { get; set; } // calculer le prix avec les params cadrans
+    // public double PrixWatt = Cadran.PrixWatt();
+    // public ReleveCadran GetReleveCadran(double remise)
+    // {
+    //     return new ReleveCadran(IndexRoues, InstanceCadranId, PrixWatt*remise);
+    // }
 }

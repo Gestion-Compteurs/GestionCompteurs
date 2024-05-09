@@ -5,7 +5,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Cadran;
 public class UpdateCadranRequestDto
 {
     public int NombreRoues { get; set; }
-    public float PrixMetreCube { get; set; }
+    public double PrixWatt { get; set; }
     public TimeOnly HeureActivation { get; set; }
     public TimeOnly HeureArret { get; set; }
     public string CadranModel { get; set; } = Constants.UnknownString;
