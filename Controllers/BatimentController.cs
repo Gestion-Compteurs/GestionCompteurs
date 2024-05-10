@@ -1,6 +1,7 @@
 ﻿using GestionBatimentsElectriquesMoyenneTension.Model.Mappers;
 using GestionCompteursElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Batiment;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +72,34 @@ public class BatimentController : ControllerBase
         if (batimentModel == null)
             return NotFound();
         return NoContent();
+    }
+    
+    // Modifier l'adresse d'un bâtiment
+    [HttpPut("modifierAdresse/{idBatiment:int:min(1)}/{nouvelleAdresse}")]
+    public async Task<IActionResult> ModifierAdresseBatiment(
+        [FromRoute] int idBatiment, 
+        [FromRoute] string nouvelleAdresse
+        )
+    {
+        throw new NotImplementedException();
+    }
+    
+    // Ajouter une instance de compteur à un bâtiment
+    [HttpPost("ajouterInstanceCompteur")]
+    public async Task<IActionResult> AjouterInstanceCompteur(
+        [FromBody] AjouterInstanceCompteurRequestDto ajouterInstanceCompteurRequestDto
+        )
+    {
+        throw new NotImplementedException();
+    }
+    
+    // Retrouver toutes les instances compteur d'un bâtiment
+    [HttpGet("retrouverInstancesCompteur/{idBatiment:int:min(1)}")]
+    public async Task<IActionResult> RetrouverInstanceCompteur(
+        [FromRoute] int idBatiment
+        )
+    {
+        throw new NotImplementedException();
     }
     
 }

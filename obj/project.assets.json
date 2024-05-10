@@ -5020,19 +5020,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Housseini\\.nuget\\packages\\": {}
+    "C:\\Users\\pc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Housseini\\Desktop\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj",
+      "projectUniqueName": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj",
       "projectName": "GestionCompteursElectriquesMoyenneTension",
-      "projectPath": "C:\\Users\\Housseini\\Desktop\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj",
-      "packagesPath": "C:\\Users\\Housseini\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Housseini\\Desktop\\GestionCompteurs\\obj\\",
+      "projectPath": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj",
+      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
+      "outputPath": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Housseini\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5110,7 +5110,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

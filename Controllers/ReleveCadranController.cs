@@ -53,7 +53,9 @@ public class ReleveCadranController:ControllerBase
     
     [HttpPost]
     [Route("createReleveCadran")]
-    public async Task<IActionResult> Create(CreateReleveCadranRequestDto createReleveCadranDto)
+    public async Task<IActionResult> Create(
+        [FromBody] CreateReleveCadranRequestDto createReleveCadranDto
+        )
     {
         if  (! await _instanceCadranRepository.InstanceCadranExists(createReleveCadranDto.InstanceCadranId)) return NotFound("Instance Cadran not found");
         var releveCadran = createReleveCadranDto.ToReleveCadranFromCreateDto();
@@ -62,4 +64,9 @@ public class ReleveCadranController:ControllerBase
         return StatusCode(500);
     }
     
+    // Modifier une relève de cadran
+    public async Task<IActionResult> ModifierReleveCadran(ModifierReleveCadranRequestDto modifierReleveCadranRequestDto)
+    {
+        throw new NotImplementedException();
+    }
 }
