@@ -9,4 +9,7 @@ public class Personne
     public string Nom { get; set; }= Constants.UnknownString;
     [Required]
     public string Prenom { get; set; }= Constants.UnknownString;
+    [Required]
+    public DateTime DateDeNaissance { get; set; }
+    
 }
