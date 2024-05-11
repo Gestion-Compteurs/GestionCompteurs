@@ -79,12 +79,12 @@ public class BatimentController(
     {
         try
         {
-            Batiment batiment = await _batimentRepository.ModifierAdresseBatiment(idBatiment, nouvelleAdresse);
+            var batiment = await _batimentRepository.ModifierAdresseBatiment(idBatiment, nouvelleAdresse);
             return Ok(batiment.ToBatimentDto());
         }
-        catch (Exception e)
+        catch (Exception exception)
         {
-            _logger.log("Une erreur s'est produite pendant la modification de l'adresse : " + exception.getMessage());
+            _logger.LogError("Une erreur s'est produite pendant la modification de l'adresse : " + exception.Message);
             return StatusCode(500);
         }
     }
@@ -97,12 +97,12 @@ public class BatimentController(
     {
         try
         {
-            Batiment batiment = await _batimentRepository.AjouterInstanceCompteur(ajouterInstanceCompteurRequestDto);
+            var batiment = await _batimentRepository.AjouterInstanceCompteur(ajouterInstanceCompteurRequestDto);
             return Ok(batiment.ToBatimentDto());
         }
         catch (Exception exception)
         {
-            _logger.log("Une erreur s'est produite pendant la modification de l'adresse : " + exception.getMessage());
+            _logger.LogError("Une erreur s'est produite pendant l'ajout de l'instance compteur : " + exception.Message);
             return StatusCode(500);
         }
     }
@@ -113,7 +113,16 @@ public class BatimentController(
         [FromRoute] int idBatiment
         )
     {
-        throw new NotImplementedException();
+       try
+        {
+            var batiment = await _batimentRepository.RetrouverInstancesCompteurs(idBatiment);
+            return Ok(batiment.ToBatimentDto());
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite pendant la recherche des instances compteurs " + exception.Message);
+            return StatusCode(500);
+        }
     }
     
 }

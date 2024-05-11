@@ -19,12 +19,14 @@ public class InstanceCompteurController:ControllerBase
     private readonly ICompteurRepository _compteurRepository;
     private readonly ICadranRepository _cadranRepository;
     private readonly IBatimentRepository _batimentRepository;
+    private readonly ILogger _logger;
     public InstanceCompteurController(
         IInstanceCadranRepository instanceCadranRepository,
         IInstanceCompteurRepository instanceCompteurRepository,
         ICompteurRepository compteurRepository,
         IBatimentRepository batimentRepository,
-        ICadranRepository cadranRepository
+        ICadranRepository cadranRepository,
+        ILogger logger
         )
     {
         _instanceCompteurRepository = instanceCompteurRepository;
@@ -32,6 +34,7 @@ public class InstanceCompteurController:ControllerBase
         _cadranRepository = cadranRepository;
         _batimentRepository = batimentRepository;
         _instanceCadranRepository = instanceCadranRepository;
+        _logger = logger;
     }
 
     
@@ -94,11 +97,25 @@ public class InstanceCompteurController:ControllerBase
     
     // Retrouver toutes les relèves d'une instance compteur
     [HttpGet("listerReleves/{idInstanceCompteur:int:min(1)}")]
-    public async Task<IActionResult> ListerReleves(
+    public async Task<IActionResult> TrouverInstanceEtReleves(
         [FromRoute] int idInstanceCompteur
     )
     {
-        throw new NotImplementedException();
+        try 
+        {
+            var instanceCompteur = await _instanceCompteurRepository.TrouverInstanceEtReleves(idInstanceCompteur);
+            if(instanceCompteur is not null) 
+            {
+                return Ok(instanceCompteur.ToInstanceCompteurDto());
+            }
+            return NotFound("L'instance compteur n'existe pas dans cette base de données");
+                     
+        }
+        catch (Exception exception)
+        {
+            _logger.LogInformation("Une erreur s'est produite lors de la recherche de l'instance compteur et de ses relèves " + exception.Message);
+            return StatusCode(500);
+        }
     }
     
 }

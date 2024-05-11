@@ -7,11 +7,13 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 public class ReleveController(
-    IReleveRepository releveRepository
+    IReleveRepository releveRepository,
+    ILogger logger
     ) : ControllerBase
 {
     // Le Repository de relève à injecter
     private readonly IReleveRepository _releveRepository = releveRepository;
+    private readonly ILogger _logger = logger;
     
     // Créer une relève à une instance de compteur
     
@@ -32,12 +34,22 @@ public class ReleveController(
 //     }
 
     // Modifier une relève
-    [HttpPut("modifier")]
+    [HttpPut("modifierReleve")]
     public async Task<IActionResult> ModifierReleve(
         [FromBody] ModifierReleveRequestDto modifierReleveRequestDto
         )
     {
-        throw new NotImplementedException();
+        
+        try
+        {
+            var releve = await _releveRepository.ModifierReleve(modifierReleveRequestDto);
+            return Ok(releve);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite lors de la modification de la relève " + exception.Message); 
+            return StatusCode(500);   
+        }
     }
     
 

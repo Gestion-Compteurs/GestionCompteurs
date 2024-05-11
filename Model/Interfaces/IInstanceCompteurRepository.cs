@@ -10,7 +10,8 @@ public interface IInstanceCompteurRepository
         Task<InstanceCompteur?> GetByIdAsync(int id);
         Task<InstanceCompteur?> CreateAsync(InstanceCompteur instance);
         Task<bool> InstanceCompteurExists(int id);
-        
-        //Task<InstanceCompteur?> CreateInstanceCadranAsync(InstanceCadran commentModel);
-    
+        Task<InstanceCompteur?> TrouverInstanceEtReleves(int idInstanceCompteur);
+
+    //Task<InstanceCompteur?> CreateInstanceCadranAsync(InstanceCadran commentModel);
+
 }

@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj": {}
+    "D:\\Code\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj": {}
   },
   "projects": {
-    "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj": {
+    "D:\\Code\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj",
+        "projectUniqueName": "D:\\Code\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj",
         "projectName": "GestionCompteursElectriquesMoyenneTension",
-        "projectPath": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj",
-        "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\obj\\",
+        "projectPath": "D:\\Code\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj",
+        "packagesPath": "C:\\Users\\hassa\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\GestionCompteurs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\hassa\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -92,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
