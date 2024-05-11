@@ -84,7 +84,7 @@ public class BatimentController(
         }
         catch (Exception e)
         {
-            _logger.log("Une erreur s'est produite pendant la modification de l'adresee")
+            _logger.log("Une erreur s'est produite pendant la modification de l'adresse : " + exception.getMessage());
             return StatusCode(500);
         }
     }
@@ -102,7 +102,7 @@ public class BatimentController(
         }
         catch (Exception exception)
         {
-            _logger.log("Une erreur s'est produite pendant la modification de l'adresse " + exception.getMessage())
+            _logger.log("Une erreur s'est produite pendant la modification de l'adresse : " + exception.getMessage());
             return StatusCode(500);
         }
     }
