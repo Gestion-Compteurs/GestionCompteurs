@@ -11,19 +11,16 @@ namespace GestionBatimentsElectriquesMoyenneTension.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class BatimentController : ControllerBase
+public class BatimentController(
+    IBatimentRepository batimentRepository,
+    ApplicationDbContext context,
+    ILogger<BatimentController> logger
+    ) : ControllerBase
 {
-    private readonly IBatimentRepository _batimentRepository;
-    private readonly ApplicationDbContext _context;
-    private readonly ILogger<BatimentController> _logger;
-
-    public BatimentController(IBatimentRepository batimentRepository,ApplicationDbContext context, ILogger<BatimentController> logger)
-    {
-        _batimentRepository = batimentRepository;
-        _logger = logger;
-        _context = context;
-    }
-
+    private readonly IBatimentRepository _batimentRepository = batimentRepository;
+    private readonly ApplicationDbContext _context = context;
+    private readonly ILogger<BatimentController> _logger = logger;
+    
     [HttpGet]
     public async Task<IActionResult> GetAllBatiments()
     {
@@ -35,7 +32,6 @@ public class BatimentController : ControllerBase
         return Ok(batiments);
         
     }
-
 
     [HttpGet("{id:int:min(1)}")]
     public async Task<IActionResult> GetBatimentById([FromRoute] int id)
@@ -81,7 +77,16 @@ public class BatimentController : ControllerBase
         [FromRoute] string nouvelleAdresse
         )
     {
-        throw new NotImplementedException();
+        try
+        {
+            Batiment batiment = await _batimentRepository.ModifierAdresseBatiment(idBatiment, nouvelleAdresse);
+            return Ok(batiment.ToBatimentDto());
+        }
+        catch (Exception e)
+        {
+            _logger.log("Une erreur s'est produite pendant la modification de l'adresee")
+            return StatusCode(500);
+        }
     }
     
     // Ajouter une instance de compteur à un bâtiment
@@ -90,7 +95,16 @@ public class BatimentController : ControllerBase
         [FromBody] AjouterInstanceCompteurRequestDto ajouterInstanceCompteurRequestDto
         )
     {
-        throw new NotImplementedException();
+        try
+        {
+            Batiment batiment = await _batimentRepository.AjouterInstanceCompteur(ajouterInstanceCompteurRequestDto);
+            return Ok(batiment.ToBatimentDto());
+        }
+        catch (Exception exception)
+        {
+            _logger.log("Une erreur s'est produite pendant la modification de l'adresse " + exception.getMessage())
+            return StatusCode(500);
+        }
     }
     
     // Retrouver toutes les instances compteur d'un bâtiment
