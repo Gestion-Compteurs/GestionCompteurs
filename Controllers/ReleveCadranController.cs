@@ -1,5 +1,6 @@
 ﻿
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.ReleveCadran;
+using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -16,17 +17,20 @@ public class ReleveCadranController:ControllerBase
     private readonly IInstanceCadranRepository _instanceCadranRepository;
     private readonly ICompteurRepository _compteurRepository;
     private readonly ICadranRepository _cadranRepository;
+    private readonly ILogger _logger;
     public ReleveCadranController(
         IInstanceCadranRepository instanceCadranRepository,
         IReleveCadranRepository releveCadranRepository,
         ICompteurRepository compteurRepository,
-        ICadranRepository cadranRepository
+        ICadranRepository cadranRepository,
+        ILogger logger
         )
     {
         _releveCadranRepository = releveCadranRepository;
         _compteurRepository = compteurRepository;
         _cadranRepository = cadranRepository;
         _instanceCadranRepository = instanceCadranRepository;
+        _logger = logger;
     }
 
     
@@ -67,6 +71,19 @@ public class ReleveCadranController:ControllerBase
     // Modifier une relève de cadran
     public async Task<IActionResult> ModifierReleveCadran(ModifierReleveCadranRequestDto modifierReleveCadranRequestDto)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var releveCadran = await _releveCadranRepository.ModifierReleveCadran(modifierReleveCadranRequestDto);
+            if (releveCadran is not null)
+            {
+                return Ok(ReleveCadranMapper.ToReleveCadranDto(releveCadran));
+            }
+            return NotFound("La relève de cadran n'a pas pu être modifiée, peut-être qu'elle n'existe pas.");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite lors de la modification de la relève cadran " + exception.Message);
+            return StatusCode(500);
+        }
     }
 }

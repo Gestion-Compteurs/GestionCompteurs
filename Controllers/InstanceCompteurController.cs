@@ -106,7 +106,7 @@ public class InstanceCompteurController:ControllerBase
             var instanceCompteur = await _instanceCompteurRepository.TrouverInstanceEtReleves(idInstanceCompteur);
             if(instanceCompteur is not null) 
             {
-                return Ok(instanceCompteur.ToInstanceCompteurDto());
+                return Ok(InstanceCompteurMapper.ToInstanceCompteurDto(instanceCompteur));
             }
             return NotFound("L'instance compteur n'existe pas dans cette base de données");
                      
@@ -117,5 +117,8 @@ public class InstanceCompteurController:ControllerBase
             return StatusCode(500);
         }
     }
+    
+    // Ajouter une relève à une instance compteur
+    
     
 }

@@ -38,6 +38,19 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
         return await _context.InstanceCompteurs.AnyAsync(s => s.InstanceCompteurId == id);
     }
 
+    public async Task<InstanceCompteur?> TrouverInstanceEtReleves(int idInstanceCompteur)
+    {
+        try
+        {
+            return await _context.InstanceCompteurs.Include(i => i.Releves).AsNoTracking().FirstOrDefaultAsync();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine("Une erreur s'est produite dans  le repository de l'instance compteur " + exception.Message);
+            throw;
+        }
+    }
+
     /*public async Task<InstanceCompteur?> CreateInstanceCadranAsync(InstanceCadran commentModel)
     {
         throw new NotImplementedException();

@@ -1,4 +1,6 @@
-﻿namespace GestionCompteursElectriquesMoyenneTension.Data;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.ReleveCadran;
+
+namespace GestionCompteursElectriquesMoyenneTension.Data;
 
 using Model.Entities;
 using Model.Interfaces;
@@ -31,6 +33,26 @@ public class ReleveCadranRepository : IReleveCadranRepository
         await _context.ReleveCadrans.AddAsync(releveCadranModel);
         await _context.SaveChangesAsync();
         return releveCadranModel;
+    }
+
+    public async Task<ReleveCadran?> ModifierReleveCadran(ModifierReleveCadranRequestDto modifierReleveCadranRequestDto)
+    {
+        try
+        {
+            await _context.ReleveCadrans
+                    .Where(r => r.ReleveCadranId == modifierReleveCadranRequestDto.ReleveCadranId)
+                    .ExecuteUpdateAsync(r =>
+                        r.SetProperty(p => p.IndexRoues, modifierReleveCadranRequestDto.IndexRoues)
+                            .SetProperty(p => p.PrixWatt, modifierReleveCadranRequestDto.PrixWatt)
+                    );
+            return await _context.ReleveCadrans
+                .Where(r => r.ReleveCadranId == modifierReleveCadranRequestDto.ReleveCadranId).FirstOrDefaultAsync();
+        }
+        catch(Exception exception)
+        {
+            Console.WriteLine("Une erreur s'est produite dans le repository relève cadran au niveau de la modification : " + exception.Message);
+            throw;
+        }
     }
 
     public async Task<bool> ReleveCadranExists(int id)
