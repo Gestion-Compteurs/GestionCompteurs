@@ -56,18 +56,78 @@ public class BatimentRepository:IBatimentRepository
         return await _context.Batiments.AnyAsync(s => s.BatimentId == id);
     }
 
-    public async Task<Batiment> AjouterInstanceCompteur(AjouterInstanceCompteurRequestDto ajouterInstanceCompteurRequestDto)
+    public async Task<Batiment?> AjouterInstanceCompteur(AjouterInstanceCompteurRequestDto ajouterInstanceCompteurRequestDto)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var batiment = await _context.Batiments
+                .Where(b => b.BatimentId == ajouterInstanceCompteurRequestDto.BatimentId)
+                .Include(b => b.InstanceCompteurs).FirstOrDefaultAsync();
+            if (batiment is null)
+                return await _context.Batiments
+                    .Where(b => b.BatimentId == ajouterInstanceCompteurRequestDto.BatimentId).FirstOrDefaultAsync();
+            var instanceCompteur = new InstanceCompteur
+            {
+                BatimentId = ajouterInstanceCompteurRequestDto.BatimentId,
+                CompteurId = ajouterInstanceCompteurRequestDto.CompteurId,
+                DateInstallation = ajouterInstanceCompteurRequestDto.DateInstallation,
+                InstanceCadrans = new List<InstanceCadran>()
+            };
+            batiment.InstanceCompteurs = batiment.InstanceCompteurs.Append(instanceCompteur);
+            _context.Update(batiment);
+            await _context.SaveChangesAsync();
+            /*
+                await _context.Batiments.Where( b => b.BatimentId == ajouterInstanceCompteurRequestDto.BatimentId)
+                    .ExecuteUpdateAsync(b =>
+                    b.SetProperty(p => p.InstanceCompteurs, batiment.InstanceCompteurs.Append(instanceCompteur)));
+                */
+            return await _context.Batiments
+                .Where(b => b.BatimentId == ajouterInstanceCompteurRequestDto.BatimentId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine("Une erreur s'est produite lors de l'ajout de l'instance compteur " + exception.Message);
+            throw;
+        }
     }
 
-    public async Task<Batiment> ModifierAdresseBatiment(int idBatiment, string nouvelleAdresse)
+    public async Task<Batiment?> ModifierAdresseBatiment(int idBatiment, string nouvelleAdresse)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var batiment = await _context.Batiments.Where(b => b.BatimentId == idBatiment).FirstOrDefaultAsync();
+            if (batiment is not null)
+            {
+                batiment.Adresse = nouvelleAdresse;
+                _context.Update(batiment);
+                await _context.SaveChangesAsync();
+            }
+            return await _context.Batiments.Where(b => b.BatimentId == idBatiment)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine("Une erreur s'est produite lors de la modification d'adresse de l'instance compteur " + exception.Message);
+            throw;
+        }
     }
 
-    public async Task<Batiment> RetrouverInstancesCompteurs(int idBatiment)
+    public async Task<Batiment?> RetrouverInstancesCompteurs(int idBatiment)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return await _context.Batiments.Where(b => b.BatimentId == idBatiment)
+                .Include(b => b.InstanceCompteurs)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine("Une erreur s'est produite lors du listage des instances compteur " + exception.Message);
+            throw;
+        }
     }
 }
