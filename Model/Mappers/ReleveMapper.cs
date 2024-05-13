@@ -27,7 +27,7 @@ public static class ReleveMapper
         return new ReleveDto
         {
             ReleveId = releveModel.ReleveId,
-            BatimentId = releveModel.BatimentId,
+            // BatimentId = releveModel.BatimentId,
             OperateurId = releveModel.OperateurId,
             DateReleve = releveModel.DateReleve,
             InstanceCompteurId = releveModel.InstanceCompteurId,

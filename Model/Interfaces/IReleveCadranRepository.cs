@@ -8,5 +8,6 @@ public interface IReleveCadranRepository
     Task<List<ReleveCadran>> GetAllAsync();
     Task<ReleveCadran?> GetByIdAsync(int id);
     Task<ReleveCadran?> CreateAsync(ReleveCadran releveCadranModel);
+    Task<ReleveCadran?> AjouterReleveCadran(CreateReleveCadranRequestDto createReleveCadranRequestDto);
     Task<ReleveCadran?> ModifierReleveCadran(ModifierReleveCadranRequestDto modifierReleveCadranRequestDto);
 }

@@ -9,8 +9,8 @@ public class Releve
     [Required] public DateOnly DateReleve { get; set; } = DateOnly.FromDateTime(DateTime.Today);
     [Required]
     public int InstanceCompteurId { get; set; }
-    [Required]
-    public int BatimentId { get; set; }
+    // [Required]
+    // public int BatimentId { get; set; }
     [Required]
     public int OperateurId { get; set; }
     public IEnumerable<ReleveCadran> ReleveCadrans = new List<ReleveCadran>();

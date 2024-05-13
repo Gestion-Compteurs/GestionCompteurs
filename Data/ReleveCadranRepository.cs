@@ -36,6 +36,12 @@ public class ReleveCadranRepository : IReleveCadranRepository
         return releveCadranModel;
     }
 
+    // Créer une relève pour une instance cadran
+    public async Task<ReleveCadran?> AjouterReleveCadran(CreateReleveCadranRequestDto createReleveCadranRequestDto)
+    {
+        throw new NotImplementedException();
+    }
+
     // Modifier une relève d'un cadran
     public async Task<ReleveCadran?> ModifierReleveCadran(ModifierReleveCadranRequestDto modifierReleveCadranRequestDto)
     {
