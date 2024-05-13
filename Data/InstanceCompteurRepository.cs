@@ -37,12 +37,16 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
     {
         return await _context.InstanceCompteurs.AnyAsync(s => s.InstanceCompteurId == id);
     }
-
+    
+    // Trouver une instance compteur et ses relèves
     public async Task<InstanceCompteur?> TrouverInstanceEtReleves(int idInstanceCompteur)
     {
         try
         {
-            return await _context.InstanceCompteurs.Include(i => i.Releves).AsNoTracking().FirstOrDefaultAsync();
+            return await _context.InstanceCompteurs
+                .Include(i => i.Releves)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
         }
         catch (Exception exception)
         {

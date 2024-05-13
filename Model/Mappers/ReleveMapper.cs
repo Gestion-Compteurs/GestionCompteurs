@@ -1,4 +1,5 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Releve;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.ReleveCadran;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
 namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
@@ -18,6 +19,21 @@ public static class ReleveMapper
             ReleveModel = releveModel.ReleveModel,
         };
     }*/
+
+    // Aller du l'entité de la relève vers le DTO de la relève, qui contient des DTO de relèves des cadrans
+    public static ReleveDto ToReleveDtoFromReleveEntity(this Releve releveModel)
+    {
+        var relevesCadransForDto = releveModel.ReleveCadrans.Select(releveCadran => ReleveCadranMapper.ToReleveCadranDto(releveCadran)).ToList();
+        return new ReleveDto
+        {
+            ReleveId = releveModel.ReleveId,
+            BatimentId = releveModel.BatimentId,
+            OperateurId = releveModel.OperateurId,
+            DateReleve = releveModel.DateReleve,
+            InstanceCompteurId = releveModel.InstanceCompteurId,
+            ReleveCadrans = relevesCadransForDto,
+        };
+    }
 
     public static Releve ToReleveFromCreateDto(this CreateReleveRequestDto releveDto)
     {

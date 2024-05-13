@@ -28,6 +28,7 @@ public class ReleveCadranRepository : IReleveCadranRepository
     }
 
 
+    // Ajouter une relève d'un cadran
     public async Task<ReleveCadran?> CreateAsync(ReleveCadran releveCadranModel)
     {
         await _context.ReleveCadrans.AddAsync(releveCadranModel);
@@ -35,6 +36,7 @@ public class ReleveCadranRepository : IReleveCadranRepository
         return releveCadranModel;
     }
 
+    // Modifier une relève d'un cadran
     public async Task<ReleveCadran?> ModifierReleveCadran(ModifierReleveCadranRequestDto modifierReleveCadranRequestDto)
     {
         try

@@ -1,5 +1,7 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Releve;
+using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestionCompteursElectriquesMoyenneTension.Controllers;
@@ -49,6 +51,28 @@ public class ReleveController(
         {
             _logger.LogError("Une erreur s'est produite lors de la modification de la relève " + exception.Message); 
             return StatusCode(500);   
+        }
+    }
+    
+    // Retrouver une relève et ses relèves cadran
+    [HttpGet("trouverReleve/{idReleve:int:min(1)}")]
+    public async Task<IActionResult> TrouverReleveEtRelevesCadran(
+        [FromRoute] int idReleve
+    )
+    {
+        try
+        {
+            var releve = await _releveRepository.TrouverReleveEtRelevesCadran(idReleve);
+            if (releve is not null)
+            {
+                var releveDto = ReleveMapper.ToReleveDtoFromReleveEntity(releve);
+            }  
+            return NotFound("La relève n'existe pas dans cette base de données");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite lors de la modification de la relève " + exception.Message); 
+            return StatusCode(500); 
         }
     }
     
