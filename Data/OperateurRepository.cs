@@ -25,12 +25,12 @@ public class OperateurRepository : IOperateurRepository
          
         public async Task<Operateur?> GetByIdAsync(int id)
         {
-            return await _context.Operateurs.FindAsync(x=>x.OperateurId==id);
+            return await _context.Operateurs.Where(x=>x.OperateurId==id).FirstOrDefaultAsync();
         }
 
         public async Task<Operateur> CreateAsync(Operateur operateurModel)
         {
-            await _context.Operateurs.Add(operateurModel);
+            await _context.Operateurs.AddAsync(operateurModel);
             await _context.SaveChangesAsync();
             return operateurModel;
         }
@@ -39,7 +39,7 @@ public class OperateurRepository : IOperateurRepository
 
         public async Task<Operateur?> UpdateAsync(int id, UpdateOperateurRequestDto updateDto)
         {
-            var operateurModel = await _context.Operateurs.FindAsync(x=>x.OperateurId==id);
+            var operateurModel = await _context.Operateurs.Where(x=>x.OperateurId==id).FirstOrDefaultAsync();
             if (operateurModel == null)
                 return null;
 
@@ -56,7 +56,7 @@ public class OperateurRepository : IOperateurRepository
 
         public async Task<Operateur?> DeleteAsync(int id)
         {
-            var operateurModel = await _context.Operateurs.FindAsync(x=>x.OperateurId==id);
+            var operateurModel = await _context.Operateurs.Where(x=>x.OperateurId==id).FirstOrDefaultAsync();
             if (operateurModel == null)
                 return null;
 

@@ -2,7 +2,7 @@
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
-namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers;
+namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 
     public static class OperateurMapper
     {

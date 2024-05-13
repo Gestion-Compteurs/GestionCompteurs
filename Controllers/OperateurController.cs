@@ -28,7 +28,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
             IEnumerable<Operateur> operateurs = await _operateurRepository.GetAllAsync();
             foreach (var operateur in operateurs)
             {
-                operateur.ToOperateurDto(); 
+                OperateurMapper.ToOperateurDto(operateur); 
             }
             return Ok(operateurs);
         }
@@ -36,18 +36,18 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetOperateurById([FromRoute] int id)
         {
-            var operateur = await _operateurRepository.GetByIdAsync(id);
-            if (operateur != null) 
-                return Ok(operateur.ToOperateurDto()); 
+            var operateurs = await _operateurRepository.GetByIdAsync(id);
+            if (operateurs != null) 
+                return Ok(operateurs.ToOperateurDto()); 
             return NotFound();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateOperateur([FromBody] CreateOperateurRequestDto operateurDto)
         {
-            var operateurModel = operateurDto.ToOperateurFromCreateDto(); 
+            var operateurModel = OperateurMapper.ToOperateurFromCreateDto(operateurDto); 
             await _operateurRepository.CreateAsync(operateurModel);
-            return CreatedAtAction(nameof(GetOperateurById), new { id = operateurModel.OperateurId }, operateurModel.ToOperateurDto()); 
+            return CreatedAtAction(nameof(GetOperateurById), new { id = operateurModel.OperateurId }, OperateurMapper.ToOperateurDto(operateurModel)); 
         }
         
         [HttpPut("{id:int:min(1)}")]
@@ -56,7 +56,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
             var operateurModel = await _operateurRepository.UpdateAsync(id, updateDto);
             if (operateurModel == null)
                 return NotFound();
-            return Ok(operateurModel.ToOperateurDto()); 
+            return Ok(OperateurMapper.ToOperateurDto(operateurModel)); 
         }
 
         [HttpDelete("{id:int:min(1)}")]
