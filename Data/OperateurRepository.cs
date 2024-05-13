@@ -1,14 +1,15 @@
 
 using GestionCompteursElectriquesMoyenneTension.Data;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
+using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace GestionCompteursElectriquesMoyenneTension.Model.Repositories
+
+namespace GestionCompteursElectriquesMoyenneTension.Data;
+
+public class OperateurRepository : IOperateurRepository
 {
-    public class OperateurRepository : IOperateurRepository
-    {
         private readonly ApplicationDbContext _context;
 
         public OperateurRepository(ApplicationDbContext context)
@@ -16,48 +17,62 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Operateur>> GetAllAsync()
+        public async Task<List<Operateur>> GetAllAsync()
         {
             return await _context.Operateurs.ToListAsync();
         }
 
-        public async Task<Operateur> GetByIdAsync(int id)
+         
+        public async Task<Operateur?> GetByIdAsync(int id)
         {
-            return await _context.Operateurs.FindAsync(id);
+            return await _context.Operateurs.FindAsync(x=>x.OperateurId==id);
         }
 
-        public async Task CreateAsync(Operateur operateur)
+        public async Task<Operateur> CreateAsync(Operateur operateurModel)
         {
-            _context.Operateurs.Add(operateur);
+            await _context.Operateurs.Add(operateurModel);
             await _context.SaveChangesAsync();
+            return operateurModel;
         }
 
-        public async Task<Operateur> UpdateAsync(int id, UpdateOperateurRequestDto updateDto)
+        
+
+        public async Task<Operateur?> UpdateAsync(int id, UpdateOperateurRequestDto updateDto)
         {
-            var operateur = await _context.Operateurs.FindAsync(id);
-            if (operateur == null)
+            var operateurModel = await _context.Operateurs.FindAsync(x=>x.OperateurId==id);
+            if (operateurModel == null)
                 return null;
 
-            // Mettre à jour les propriétés nécessaires avec les valeurs du DTO
-            operateur.Nom = updateDto.Nom;
-            operateur.Prenom = updateDto.Prenom;
-            operateur.CIN = updateDto.CIN;
-            operateur.Email = updateDto.Email;
-            operateur.DateDeNaissance = updateDto.DateDeNaissance;
+            operateurModel.Nom = updateDto.Nom;
+            operateurModel.Prenom = updateDto.Prenom;
+            operateurModel.CIN = updateDto.CIN;
+            operateurModel.DateDeNaissance = updateDto.DateDeNaissance;
+            operateurModel.Civilite=updateDto.Civilite;
+            operateurModel.DateEmbauche=updateDto.DateEmbauche;
             await _context.SaveChangesAsync();
-            return operateur;
+            return operateurModel;
         }
 
-        public async Task<Operateur> DeleteAsync(int id)
+
+        public async Task<Operateur?> DeleteAsync(int id)
         {
-            var operateur = await _context.Operateurs.FindAsync(id);
-            if (operateur == null)
+            var operateurModel = await _context.Operateurs.FindAsync(x=>x.OperateurId==id);
+            if (operateurModel == null)
                 return null;
 
-            _context.Operateurs.Remove(operateur);
+            _context.Operateurs.Remove(operateurModel);
             await _context.SaveChangesAsync();
-            return operateur;
+            return operateurModel;
         }
+
+        
+
+         
+            public async Task<bool> OperateurExists(int id)
+            {
+                return await _context.Operateurs.AnyAsync(s => s.OperateurId == id);
+            }         
+            
     }
-}
+
 

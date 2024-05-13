@@ -12,6 +12,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Cadran> Cadrans { get; set; }
     public DbSet<Batiment> Batiments { get; set; }
     public DbSet<ReleveCadran> ReleveCadrans { get; set; }
+    public DbSet<Operateur> Operateurs { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         

@@ -2,8 +2,8 @@
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
-namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers
-{
+namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers;
+
     public static class OperateurMapper
     {
         public static OperateurDto ToOperateurDto(this Operateur operateurModel)
@@ -13,8 +13,7 @@ namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers
                 OperateurId = operateurModel.OperateurId,
                 Nom = operateurModel.Nom,
                 Prenom = operateurModel.Prenom,
-                Cin = operateurModel.Cin,
-                Email = operateurModel.Email,
+                CIN = operateurModel.CIN,
                 DateDeNaissance = operateurModel.DateDeNaissance,
                 Civilite = operateurModel.Civilite,
                 DateEmbauche = operateurModel.DateEmbauche
@@ -27,8 +26,7 @@ namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers
             {
                 Nom = createOperateurDto.Nom,
                 Prenom = createOperateurDto.Prenom,
-                Cin = createOperateurDto.Cin,
-                Email = createOperateurDto.Email,
+                CIN = createOperateurDto.CIN,
                 DateDeNaissance = createOperateurDto.DateDeNaissance,
                 Civilite = createOperateurDto.Civilite,
                 DateEmbauche = createOperateurDto.DateEmbauche
@@ -40,8 +38,7 @@ namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers
             
             operateurModel.Nom = updateOperateurDto.Nom;
             operateurModel.Prenom = updateOperateurDto.Prenom;
-            operateurModel.Cin = updateOperateurDto.Cin;
-            operateurModel.Email = updateOperateurDto.Email;
+            operateurModel.CIN = updateOperateurDto.CIN;
             operateurModel.DateDeNaissance = updateOperateurDto.DateDeNaissance;
             operateurModel.Civilite = updateOperateurDto.Civilite;
             operateurModel.DateEmbauche = updateOperateurDto.DateEmbauche;
@@ -49,4 +46,4 @@ namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers
             return operateurModel;
         }
     }
-}
+

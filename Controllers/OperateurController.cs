@@ -1,14 +1,12 @@
 
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 using GestionCompteursElectriquesMoyenneTension.Data;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+namespace GestionCompteursElectriquesMoyenneTension.Controllers;
 
-namespace GestionCompteursElectriquesMoyenneTension.Controllers
-{
     [ApiController]
     [Route("api/[controller]")]
     public class OperateurController : ControllerBase
@@ -70,4 +68,4 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers
             return NoContent();
         }
     }
-}
+
