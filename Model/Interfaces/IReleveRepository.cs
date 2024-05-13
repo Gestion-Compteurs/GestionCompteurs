@@ -6,7 +6,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 
 public interface IReleveRepository
 {
-    Task<Releve?> AjouterNouvelleReleve(AjouterNouvelleReleveRequestDto ajouterNouvelleReleveRequestDto);
+    Task<Releve?> CreerNouvelleReleve(AjouterNouvelleReleveRequestDto ajouterNouvelleReleveRequestDto);
     Task<Releve?> ModifierReleve(ModifierReleveRequestDto modifierReleveRequestDto);
     Task<Releve?> TrouverReleveEtRelevesCadran(int idReleve);
 }

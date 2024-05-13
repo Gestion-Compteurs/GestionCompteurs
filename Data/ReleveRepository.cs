@@ -11,7 +11,7 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
 {
     private readonly ApplicationDbContext _context = context;
     // Fonction lorsque l'utilisateur demande de créer une nouvelle relève à une instance compteur
-    public async Task<Releve?> AjouterNouvelleReleve(AjouterNouvelleReleveRequestDto ajouterNouvelleReleveRequestDto)
+    public async Task<Releve?> CreerNouvelleReleve(AjouterNouvelleReleveRequestDto ajouterNouvelleReleveRequestDto)
     {
         try
         {
