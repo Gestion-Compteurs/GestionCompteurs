@@ -19,4 +19,5 @@ public class InstanceCadran
     // {
     //     return new ReleveCadran(IndexRoues, InstanceCadranId, PrixWatt*remise);
     // }
+    public IEnumerable<ReleveCadran> ReleveCadrans { get; set; } = new List<ReleveCadran>();
 }
