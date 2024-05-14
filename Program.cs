@@ -4,10 +4,19 @@ using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+/*
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlite(
         builder.Configuration.GetConnectionString("sqlitedb")));
+*/
+
+// Configurer l'injection de dépendances pour le contexte de la base de données
+var connectionString = builder.Configuration.GetConnectionString("sql_server_hassane");
+builder.Services.AddSqlServer<ApplicationDbContext>(connectionString);
 var iServiceCollection = builder.Services;
+
+
 // Add services to the container.
 
 iServiceCollection.AddControllers();
@@ -22,7 +31,7 @@ builder.Services.AddScoped<IBatimentRepository, BatimentRepository>();
 builder.Services.AddScoped<IInstanceCompteurRepository, InstanceCompteurRepository>();
 builder.Services.AddScoped<IInstanceCadranRepository, InstanceCadranRepository>();
 builder.Services.AddScoped<IReleveCadranRepository, ReleveCadranRepository>();
-
+builder.Services.AddScoped<IReleveRepository, ReleveRepository>();
 
 var app = builder.Build();
 

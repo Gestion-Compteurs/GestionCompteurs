@@ -69,6 +69,7 @@ public class ReleveCadranController:ControllerBase
     }
     
     // Modifier une relève de cadran
+    [HttpPut("modifierReleveCadran")]
     public async Task<IActionResult> ModifierReleveCadran(ModifierReleveCadranRequestDto modifierReleveCadranRequestDto)
     {
         try
