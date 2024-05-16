@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionCompteursElectriquesMoyenneTension")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aee21eac5ea87561d4d3845d210990f827a870b1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e65f51fd75cd8967d7d4dc336b3bb6532c2a3d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionCompteursElectriquesMoyenneTension")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionCompteursElectriquesMoyenneTension")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,5 +1,6 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Compteur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
@@ -43,12 +44,22 @@ public class CompteurController : ControllerBase
         return NotFound();
     }
 
+    // Ajouter un compteur, avec les types cadrans dont nous avons besoin
     [HttpPost]
-    public async Task<IActionResult> CreateCompteur([FromBody] CreateCompteurRequestDto compteurDto)
+    public async Task<IActionResult> CreateCompteur([FromBody] AjouterCompteurRequestDto ajouterCompteurRequestDto)
     {
-        var compteurModel = compteurDto.ToCompteurFromCreateDto();
-        await _compteurRepository.CreateAsync(compteurModel);
-        return CreatedAtAction(nameof(GetCompteurById), new { id = compteurModel.CompteurId, }, compteurModel.ToCompteurDto());
+        try
+        {
+            var compteurEtTypesCadrans = CompteurMapper.ToCompteurDto(await _compteurRepository.AjouterCompteurEtTypesCadrans(ajouterCompteurRequestDto));
+            if (compteurEtTypesCadrans is not null)
+                return Ok(compteurEtTypesCadrans);
+            return StatusCode(500);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite pendant l'ajout du compteur et ses types cadrans : " + exception.Message);
+            return StatusCode(500);
+        }
     }
     
     [HttpPut]
@@ -64,12 +75,8 @@ public class CompteurController : ControllerBase
     }
 
     [HttpDelete("{id:int:min(1)}")]
-    public IActionResult Delete([FromRoute] int id)
+    public async Task<bool> Delete([FromRoute] int id)
     {
-        var compteurModel = _compteurRepository.DeleteAsync(id);
-        if (compteurModel == null)
-            return NotFound();
-        return NoContent();
+        return await _compteurRepository.DeleteAsync(id);
     }
-    
 }

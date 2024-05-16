@@ -13,6 +13,8 @@ public class Cadran
     public TimeOnly HeureArret { get; set; }
     public IEnumerable<InstanceCadran> InstancesCadran { get; set; } = new List<InstanceCadran>();
     
+    public IEnumerable<Compteur> CompteursLePossedant { get; set; } = new List<Compteur>();
+    
     // public double GetMontantAPayerCadran()
     // {
     //     return 0.0f;

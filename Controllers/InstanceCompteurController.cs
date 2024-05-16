@@ -26,7 +26,7 @@ public class InstanceCompteurController:ControllerBase
         ICompteurRepository compteurRepository,
         IBatimentRepository batimentRepository,
         ICadranRepository cadranRepository,
-        ILogger logger
+        ILogger<InstanceCompteurController> logger
         )
     {
         _instanceCompteurRepository = instanceCompteurRepository;

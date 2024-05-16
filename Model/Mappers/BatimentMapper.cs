@@ -1,5 +1,7 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Batiment;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
+using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 
 namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers;
 
@@ -7,10 +9,13 @@ public static class BatimentMapper
 {
     public static BatimentDto ToBatimentDto(this Batiment batimentModel)
     {
+        var instanceCompteurDtosAMettre = batimentModel.InstanceCompteurs.Select(instanceCompteurDto => instanceCompteurDto.ToInstanceCompteurDto()).ToList();
         return new BatimentDto
         {
             BatimentId = batimentModel.BatimentId,
-            Adresse = batimentModel.Adresse
+            Adresse = batimentModel.Adresse,
+            InstanceCompteursDtos = instanceCompteurDtosAMettre,
+            
         };
     }
 
