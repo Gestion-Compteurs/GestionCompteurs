@@ -23,7 +23,7 @@ public class ReleveCadranController:ControllerBase
         IReleveCadranRepository releveCadranRepository,
         ICompteurRepository compteurRepository,
         ICadranRepository cadranRepository,
-        ILogger logger
+        ILogger<ReleveCadranController> logger
         )
     {
         _releveCadranRepository = releveCadranRepository;

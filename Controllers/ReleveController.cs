@@ -10,7 +10,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
 [Route("api/[controller]")]
 public class ReleveController(
     IReleveRepository releveRepository,
-    ILogger logger
+    ILogger<ReleveController> logger
     ) : ControllerBase
 {
     // Le Repository de relève à injecter

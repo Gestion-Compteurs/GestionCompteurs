@@ -4,6 +4,7 @@ using GestionCompteursElectriquesMoyenneTension.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionCompteursElectriquesMoyenneTension.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240516134043_m3")]
+    partial class m3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CadranCompteur", b =>
+                {
+                    b.Property<int>("CompteursLePossedantCompteurId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypesCadransCadranId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CompteursLePossedantCompteurId", "TypesCadransCadranId");
+
+                    b.HasIndex("TypesCadransCadranId");
+
+                    b.ToTable("CadranCompteur");
+                });
 
             modelBuilder.Entity("GestionCompteursElectriquesMoyenneTension.Model.Entities.Batiment", b =>
                 {
@@ -94,21 +112,6 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                     b.HasKey("CompteurId");
 
                     b.ToTable("Compteurs");
-                });
-
-            modelBuilder.Entity("GestionCompteursElectriquesMoyenneTension.Model.Entities.CompteurCadran", b =>
-                {
-                    b.Property<int>("CadranId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CompteurId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CadranId", "CompteurId");
-
-                    b.HasIndex("CompteurId");
-
-                    b.ToTable("CompteurCadrans");
                 });
 
             modelBuilder.Entity("GestionCompteursElectriquesMoyenneTension.Model.Entities.InstanceCadran", b =>
@@ -211,17 +214,17 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                     b.ToTable("ReleveCadrans");
                 });
 
-            modelBuilder.Entity("GestionCompteursElectriquesMoyenneTension.Model.Entities.CompteurCadran", b =>
+            modelBuilder.Entity("CadranCompteur", b =>
                 {
-                    b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Cadran", null)
+                    b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Compteur", null)
                         .WithMany()
-                        .HasForeignKey("CadranId")
+                        .HasForeignKey("CompteursLePossedantCompteurId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Compteur", null)
+                    b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Cadran", null)
                         .WithMany()
-                        .HasForeignKey("CompteurId")
+                        .HasForeignKey("TypesCadransCadranId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

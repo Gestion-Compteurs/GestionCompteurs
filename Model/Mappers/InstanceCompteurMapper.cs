@@ -8,18 +8,18 @@ public static class InstanceCompteurMapper
 {
     public static InstanceCompteurDto ToInstanceCompteurDto(this InstanceCompteur instanceCompteurModel)
     {
-        var cadranDtos = new List<InstanceCadranDto>();
-        foreach (var obj in instanceCompteurModel.InstanceCadrans)
-        {
-            cadranDtos.Add(obj.ToInstanceCadranDto());
-        }
+        var cadranDtos = instanceCompteurModel.InstanceCadrans
+            .Select(obj => obj.ToInstanceCadranDto()).ToList();
+        var relevesDtos = instanceCompteurModel.Releves
+            .Select(releve => releve.ToReleveDtoFromReleveEntity()).ToList();
         return new InstanceCompteurDto
         {
             InstanceCompteurId = instanceCompteurModel.InstanceCompteurId,
             CompteurId = instanceCompteurModel.CompteurId,
             DateInstallation = instanceCompteurModel.DateInstallation,
             BatimentId = instanceCompteurModel.BatimentId,
-            InstanceCadrans = cadranDtos
+            InstanceCadrans = cadranDtos,
+            Releves = relevesDtos
         };
     }
 

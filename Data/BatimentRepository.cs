@@ -67,9 +67,6 @@ public class BatimentRepository:IBatimentRepository
                 .Include(b => b.InstanceCompteurs)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
-            if (batiment is null)
-                return await _context.Batiments
-                    .Where(b => b.BatimentId == ajouterInstanceCompteurRequestDto.BatimentId).FirstOrDefaultAsync();
             // Chercher le type de compteur correspondant pour avoir les détails
             var compteur = await _context.Compteurs
                 .Where(c => c.CompteurId == ajouterInstanceCompteurRequestDto.CompteurId)
@@ -89,6 +86,7 @@ public class BatimentRepository:IBatimentRepository
             };
             // Insertion pour obtenir un identifiant
             await _context.InstanceCompteurs.AddAsync(instanceCompteur);
+            await _context.SaveChangesAsync();
             // Remplir la liste des instances cadrans en créeant les instances de cadrans correspondantes aux types de cadrans du type de compteur
             foreach (var typeCadran in compteur.TypesCadrans)
             {
@@ -101,19 +99,10 @@ public class BatimentRepository:IBatimentRepository
                     InstanceCompteurId = instanceCompteur.CompteurId, // La clé etrangère du type de compteur
                 };
                 await _context.InstanceCadrans.AddAsync(instanceCadran);
+                await _context.SaveChangesAsync();
             }
             // Sauvegarder les changements dans la base de données
             await _context.SaveChangesAsync();
-            /*
-                await _context.Batiments.Where( b => b.BatimentId == ajouterInstanceCompteurRequestDto.BatimentId)
-                    .ExecuteUpdateAsync(b =>
-                    b.SetProperty(p => p.InstanceCompteurs, batiment.InstanceCompteurs.Append(instanceCompteur)));
-
-            return await _context.Batiments
-                .Where(b => b.BatimentId == ajouterInstanceCompteurRequestDto.BatimentId)
-                .AsNoTracking()
-                .FirstOrDefaultAsync();
-            */
             return await _context.Batiments
                     .Where(b => b.BatimentId == ajouterInstanceCompteurRequestDto.BatimentId)
                     .Include(b => b.InstanceCompteurs)

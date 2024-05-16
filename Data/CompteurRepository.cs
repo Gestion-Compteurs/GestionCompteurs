@@ -66,6 +66,7 @@ public class CompteurRepository:ICompteurRepository
                 var compteurCree = CompteurMapper.ToCompteurDtoFromAjouterCompteurRequestDto(ajouterCompteurRequestDto);
                 // L'ajouter dans la base de données pour avoir un identifiant
                 await _context.Compteurs.AddAsync(compteurCree);
+                await _context.SaveChangesAsync();
                 // Retrouver tous les types cadrans dans le Dto et créer les compteurs nécéssaires associés dans la base de données s'ils n'existent pas
                 foreach (var cadranAjoute in ajouterCompteurRequestDto.TypesCadrans)
                 {
@@ -79,15 +80,21 @@ public class CompteurRepository:ICompteurRepository
                     {
                         // On le crée
                         var cadranCreation = await _context.Cadrans.AddAsync(CadranMapper.ToCadranFromCreateDto(cadranAjoute));
+                        await _context.SaveChangesAsync();
                         // Si on arrive pas à le créer, on lance une exception
                         if (cadranCreation is null) throw new Exception("Une erreur s'est produite dans le repository de creéation de compteur, lors de l'ajout d'un nouveau cadran");
                     }
                     // Puis on le lie au compteur
-                    var cadranCreeMaintenant = await _context.Cadrans
+                    var cadranCreeMaintenantOuExistant = await _context.Cadrans
                         .Where(cadran => cadran.CadranModel == cadranAjoute.CadranModel)
                         .Include(cadran => cadran.CompteursLePossedant)
                         .FirstOrDefaultAsync();
-                    cadranCreeMaintenant?.CompteursLePossedant.Append(compteurCree);
+                    _context.CompteurCadrans.Add(
+                        new CompteurCadran
+                        {
+                            CompteurId = compteurCree.CompteurId,
+                            CadranId = cadranCreeMaintenantOuExistant.CadranId
+                        });
                 }
                 // On sauvegarde tous les changements
                 await _context.SaveChangesAsync();
