@@ -1,4 +1,5 @@
-﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Releve;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Releve;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
@@ -81,6 +82,37 @@ public class ReleveController(
         }
     }
     
-
-
+    // Créer une nouvelle relève
+    [HttpPost("ajouterPourInstanceCompteur")]
+    public async Task<IActionResult> CreerNouvelleReleve(
+        [FromBody] AjouterNouvelleReleveRequestDto ajouterNouvelleReleveRequestDto
+    )
+    {
+        try
+        {
+            return Ok(await _releveRepository.CreerNouvelleReleve(ajouterNouvelleReleveRequestDto));
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite lors de la création d'une nouvelle relève " + exception.Message); 
+            return StatusCode(500); 
+        }
+    }
+    
+    // Fonction pour confirmer la création de la nouvelle relève
+    [HttpPost("confirmerAjouterPourInstanceCompteur")]
+    public async Task<IActionResult> ConfirmerCreationNouvelleReleve(
+        [FromBody] ConfirmerCreationNouvelleReleveRequestDto confirmerCreationNouvelleReleveRequestDto
+    )
+    {
+        try
+        {
+            return Ok(await _releveRepository.ConfirmerCreationNouvelleReleve(confirmerCreationNouvelleReleveRequestDto));
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite lors de la confirmation de la création d'une nouvelle relève " + exception.Message); 
+            return StatusCode(500); 
+        }
+    }
 }

@@ -77,6 +77,7 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
                 if (releveCadranNonRenseignee is not null) // Si la relève non renseingée existe effectivement dans la base de données
                 {
                     _context.Update(releveCadranRenseignee);
+                    await _context.SaveChangesAsync();
                 }
             }
             // Sauvegarder les changements dans la base de données
