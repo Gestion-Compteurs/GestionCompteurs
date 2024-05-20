@@ -89,6 +89,25 @@ public class BatimentController(
         }
     }
     
+    // Modifier les détails d'un bâtiment, sans les instances compteurs
+    [HttpPut("modifierDetails/{idBatiment:int:min(1)}")]
+    public async Task<IActionResult> ModifierDetailsBatiment(
+        [FromRoute] int idBatiment, 
+        [FromBody]  UpdateBatimentRequestDto updateBatimentRequestDto
+    )
+    {
+        try
+        {
+            var batiment = await _batimentRepository.ModifierDetailsBatiment(idBatiment, updateBatimentRequestDto);
+            return Ok(batiment.ToBatimentDto());
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite pendant la modification des détails du bâtiment : " + exception.Message);
+            return StatusCode(500);
+        }
+    }
+    
     // Ajouter une instance de compteur à un bâtiment
     [HttpPost("ajouterInstanceCompteur")]
     public async Task<IActionResult> AjouterInstanceCompteur(

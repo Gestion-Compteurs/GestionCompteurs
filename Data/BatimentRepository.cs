@@ -125,11 +125,8 @@ public class BatimentRepository:IBatimentRepository
                 .Where(b => b.BatimentId == idBatiment)
                 .FirstOrDefaultAsync();
             if (batiment is null)
-                return await _context.Batiments.Where(b => b.BatimentId == idBatiment)
-                    .AsNoTracking()
-                    .FirstOrDefaultAsync();
+                return null;
             batiment.Adresse = nouvelleAdresse;
-            // _context.Update(batiment);
             await _context.SaveChangesAsync();
             return await _context.Batiments.Where(b => b.BatimentId == idBatiment)
                 .AsNoTracking()
@@ -155,6 +152,30 @@ public class BatimentRepository:IBatimentRepository
         catch (Exception exception)
         {
             Console.WriteLine("Une erreur s'est produite lors du listage des instances compteur " + exception.Message);
+            throw;
+        }
+    }
+
+    public async Task<Batiment?> ModifierDetailsBatiment(int idBatiment, UpdateBatimentRequestDto updateBatimentRequestDto)
+    {
+        try
+        {
+            var batiment = await _context.Batiments
+                .Where(b => b.BatimentId == idBatiment)
+                .FirstOrDefaultAsync();
+            if (batiment is null)
+                return null;
+            batiment.Adresse = updateBatimentRequestDto.Adresse;
+            batiment.TypeBatiment = updateBatimentRequestDto.TypeBatiment;
+            batiment.NombreEtages = updateBatimentRequestDto.NombreEtages;
+            await _context.SaveChangesAsync();
+            return await _context.Batiments.Where(b => b.BatimentId == idBatiment)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine("Une erreur s'est produite lors de la modification d'adresse de l'instance compteur " + exception.Message);
             throw;
         }
     }

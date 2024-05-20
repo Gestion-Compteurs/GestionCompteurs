@@ -15,4 +15,5 @@ public interface IBatimentRepository
     Task<Batiment?> AjouterInstanceCompteur(AjouterInstanceCompteurRequestDto ajouterInstanceCompteurRequestDto);
     Task<Batiment?> ModifierAdresseBatiment(int idBatiment, string nouvelleAdresse);
     Task<Batiment?> RetrouverInstancesCompteurs(int idBatiment);
+    Task<Batiment?> ModifierDetailsBatiment(int idBatiment, UpdateBatimentRequestDto updateBatimentRequestDto);
 }
