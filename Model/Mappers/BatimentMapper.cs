@@ -14,6 +14,8 @@ public static class BatimentMapper
         {
             BatimentId = batimentModel.BatimentId,
             Adresse = batimentModel.Adresse,
+            NombreEtages = batimentModel.NombreEtages,
+            TypeBatiment = batimentModel.TypeBatiment,
             InstanceCompteursDtos = instanceCompteurDtosAMettre,
             
         };
@@ -23,7 +25,9 @@ public static class BatimentMapper
     {
         return new Batiment
         {
-            Adresse = batimentDto.Adresse
+            Adresse = batimentDto.Adresse,
+            NombreEtages = batimentDto.NombreEtages,
+            TypeBatiment = batimentDto.TypeBatiment,
         };
     }
 }
