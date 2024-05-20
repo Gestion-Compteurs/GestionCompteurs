@@ -169,8 +169,10 @@ public class BatimentRepository:IBatimentRepository
             batiment.TypeBatiment = updateBatimentRequestDto.TypeBatiment;
             batiment.NombreEtages = updateBatimentRequestDto.NombreEtages;
             await _context.SaveChangesAsync();
-            return await _context.Batiments.Where(b => b.BatimentId == idBatiment)
+            return await _context.Batiments
+                .Where(b => b.BatimentId == idBatiment)
                 .AsNoTracking()
+                .Include(b => b.InstanceCompteurs)
                 .FirstOrDefaultAsync();
         }
         catch (Exception exception)
