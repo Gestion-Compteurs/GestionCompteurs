@@ -8,7 +8,7 @@ public class Operateur:Personne
     [Required]
     public DateTime DateEmbauche { get; set; }
     [Required]
-    public string Civilite { get; set; }= string.Empty;
+    public string? Civilite { get; set; }= string.Empty;
     // est ce qu'on a besoin de naviguer vers les relèves 
     public IEnumerable<Releve> releves { get; set; } = new List<Releve>();
 }

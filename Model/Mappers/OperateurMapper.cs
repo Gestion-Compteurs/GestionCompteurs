@@ -13,7 +13,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
                 OperateurId = operateurModel.OperateurId,
                 Nom = operateurModel.Nom,
                 Prenom = operateurModel.Prenom,
-                CIN = operateurModel.CIN,
+                CIN = operateurModel.Cin,
                 DateDeNaissance = operateurModel.DateDeNaissance,
                 Civilite = operateurModel.Civilite,
                 DateEmbauche = operateurModel.DateEmbauche
@@ -26,7 +26,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
             {
                 Nom = createOperateurDto.Nom,
                 Prenom = createOperateurDto.Prenom,
-                CIN = createOperateurDto.CIN,
+                Cin = createOperateurDto.CIN,
                 DateDeNaissance = createOperateurDto.DateDeNaissance,
                 Civilite = createOperateurDto.Civilite,
                 DateEmbauche = createOperateurDto.DateEmbauche
@@ -38,7 +38,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
             
             operateurModel.Nom = updateOperateurDto.Nom;
             operateurModel.Prenom = updateOperateurDto.Prenom;
-            operateurModel.CIN = updateOperateurDto.CIN;
+            operateurModel.Cin = updateOperateurDto.CIN;
             operateurModel.DateDeNaissance = updateOperateurDto.DateDeNaissance;
             operateurModel.Civilite = updateOperateurDto.Civilite;
             operateurModel.DateEmbauche = updateOperateurDto.DateEmbauche;

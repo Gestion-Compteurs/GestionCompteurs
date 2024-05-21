@@ -4,6 +4,7 @@ using GestionCompteursElectriquesMoyenneTension.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Oracle.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -15,17 +16,100 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GestionCompteursElectriquesMoyenneTension.Model.Entities.Administrateur", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("DateDeNaissance")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(10)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("BOOLEAN");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("BOOLEAN");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<string>("NomAdmin")
+                        .HasMaxLength(40)
+                        .HasColumnType("NVARCHAR2(40)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("BOOLEAN");
+
+                    b.Property<string>("Prenom")
+                        .HasMaxLength(40)
+                        .HasColumnType("NVARCHAR2(40)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("BOOLEAN");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("\"NormalizedUserName\" IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
 
             modelBuilder.Entity("GestionCompteursElectriquesMoyenneTension.Model.Entities.Batiment", b =>
                 {
                     b.Property<int>("BatimentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatimentId"));
 
                     b.Property<string>("Adresse")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.HasKey("BatimentId");
 
@@ -36,24 +120,28 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("CadranId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CadranId"));
 
                     b.Property<string>("CadranModel")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("NVARCHAR2(50)");
 
-                    b.Property<TimeOnly>("HeureActivation")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("HeureActivation")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(48)");
 
-                    b.Property<TimeOnly>("HeureArret")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("HeureArret")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(48)");
 
                     b.Property<int>("NombreRoues")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<double>("PrixWatt")
-                        .HasColumnType("REAL");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.HasKey("CadranId");
 
@@ -64,21 +152,23 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("CompteurId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompteurId"));
 
                     b.Property<int>("AnneeCreation")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<string>("Marque")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Modele")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<int>("VoltageMax")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("CompteurId");
 
@@ -89,16 +179,18 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("InstanceCadranId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstanceCadranId"));
 
                     b.Property<int>("CadranId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("IndexRoues")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("InstanceCompteurId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("InstanceCadranId");
 
@@ -113,16 +205,19 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("InstanceCompteurId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstanceCompteurId"));
 
                     b.Property<int>("BatimentId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("CompteurId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
-                    b.Property<DateOnly>("DateInstallation")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("DateInstallation")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(10)");
 
                     b.HasKey("InstanceCompteurId");
 
@@ -137,29 +232,31 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("OperateurId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
-                    b.Property<string>("CIN")
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OperateurId"));
+
+                    b.Property<string>("Cin")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Civilite")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<DateTime>("DateDeNaissance")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<DateTime>("DateEmbauche")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TIMESTAMP(7)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("NVARCHAR2(2000)");
 
                     b.HasKey("OperateurId");
 
@@ -170,19 +267,22 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("ReleveId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReleveId"));
 
                     b.Property<int>("BatimentId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
-                    b.Property<DateOnly>("DateReleve")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("DateReleve")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(10)");
 
                     b.Property<int>("InstanceCompteurId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("OperateurId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.HasKey("ReleveId");
 
@@ -197,20 +297,211 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("ReleveCadranId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReleveCadranId"));
 
                     b.Property<int>("IndexRoues")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<int>("InstanceCadranId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("NUMBER(10)");
 
                     b.Property<double>("PrixWatt")
-                        .HasColumnType("REAL");
+                        .HasColumnType("BINARY_DOUBLE");
 
                     b.HasKey("ReleveCadranId");
 
                     b.ToTable("ReleveCadrans");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("NVARCHAR2(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("\"NormalizedName\" IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("NUMBER(10)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("NUMBER(1)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IdentityUser");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMBER(10)");
+
+                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("NVARCHAR2(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("NVARCHAR2(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("NVARCHAR2(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("NVARCHAR2(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("NVARCHAR2(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("NVARCHAR2(2000)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("GestionCompteursElectriquesMoyenneTension.Model.Entities.InstanceCadran", b =>
@@ -254,6 +545,57 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                     b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Operateur", null)
                         .WithMany("releves")
                         .HasForeignKey("OperateurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Administrateur", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Administrateur", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Administrateur", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("GestionCompteursElectriquesMoyenneTension.Model.Entities.Administrateur", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

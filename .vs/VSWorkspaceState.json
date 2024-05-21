@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers"
+    "\\bin",
+    "\\Model",
+    "\\Properties"
   ],
-  "SelectedNode": "\\GestionCompteursElectriquesMoyenneTension.sln",
   "PreviewInSolutionExplorer": false
 }

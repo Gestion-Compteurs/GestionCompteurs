@@ -5,5 +5,5 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Batiment;
 
 public class CreateBatimentRequestDto
 {
-    [Required] public string Adresse { get; set; } = Constants.UnknownString;
+    [Required] public string? Adresse { get; set; } = Constants.UnknownString;
 }

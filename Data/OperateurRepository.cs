@@ -45,7 +45,7 @@ public class OperateurRepository : IOperateurRepository
 
             operateurModel.Nom = updateDto.Nom;
             operateurModel.Prenom = updateDto.Prenom;
-            operateurModel.CIN = updateDto.CIN;
+            operateurModel.Cin = updateDto.CIN;
             operateurModel.DateDeNaissance = updateDto.DateDeNaissance;
             operateurModel.Civilite=updateDto.Civilite;
             operateurModel.DateEmbauche=updateDto.DateEmbauche;

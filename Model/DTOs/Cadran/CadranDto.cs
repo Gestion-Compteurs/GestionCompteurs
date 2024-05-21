@@ -9,5 +9,5 @@ public class CadranDto
     public double PrixWatt { get; set; }
     public TimeOnly HeureActivation { get; set; }
     public TimeOnly HeureArret { get; set; }
-    public string CadranModel { get; set; } = Constants.UnknownString;
+    public string? CadranModel { get; set; } = Constants.UnknownString;
 }
