@@ -24,18 +24,6 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
                 .FirstOrDefaultAsync();
             // Créer de nouvelles relèves cadrans pour toutes les instances cadran du compteur correspondant
             if (instanceCompteur is null) return null;
-            foreach (var instanceCadran in instanceCompteur.InstanceCadrans)
-            {
-                var releveCadran = new ReleveCadran
-                {
-                    // ReleveCadranId sera ajouté lors du AddAsync à la base de données
-                    IndexRoues = 0, // IndexRoues sera informé lors de la validation
-                    // Ajout dans la liste des relèves cadran de son instance cadran 
-                    InstanceCadranId = instanceCadran.InstanceCadranId, // Lier la relève avec l'instance cadran
-                    PrixWatt = 0 // Le PrixWatt sera informé lors de la validation
-                };
-                await _context.AddAsync(releveCadran); // Ajouter pour obtenir un identifiant
-            }
             // Créer une nouvelle relève
             var releve = new Releve
             {
@@ -46,8 +34,23 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
                 DateReleve = DateOnly.FromDateTime(DateTime.Today),
                 // L'identifiant de l'opérateur sera ajouté lors de la confirmation
             };
-            await _context.AddAsync(releve);
+            await _context.Releves.AddAsync(releve);
             await _context.SaveChangesAsync();
+            foreach (var instanceCadran in instanceCompteur.InstanceCadrans)
+            {
+                var releveCadran = new ReleveCadran
+                {
+                    // ReleveCadranId sera ajouté lors du AddAsync à la base de données
+                    ReleveId = releve.ReleveId,
+                    IndexRoues = 0, // IndexRoues sera informé lors de la validation
+                    // Ajout dans la liste des relèves cadran de son instance cadran 
+                    InstanceCadranId = instanceCadran.InstanceCadranId, // Lier la relève avec l'instance cadran
+                    PrixWatt = 0 // Le PrixWatt sera informé lors de la validation
+                };
+                await _context.ReleveCadrans.AddAsync(releveCadran);
+                await _context.SaveChangesAsync();
+                // Ajouter pour obtenir un identifiant
+            }
             // Retourner la relève
             var releveAjoutee = await _context.Releves
                 .Where(r => r.ReleveId == releve.ReleveId)
@@ -73,11 +76,12 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
             foreach (var releveCadranRenseignee in confirmerCreationNouvelleReleveRequestDto.ReleveCadranDtos)
             {
                 var releveCadranNonRenseignee = await _context.ReleveCadrans
-                    .Where(rc => rc.ReleveCadranId == releveCadranRenseignee.ReleveCadranId).FirstOrDefaultAsync();
+                    .Where(rc => rc.ReleveCadranId == releveCadranRenseignee.ReleveCadranId)
+                    .FirstOrDefaultAsync();
                 if (releveCadranNonRenseignee is not null) // Si la relève non renseingée existe effectivement dans la base de données
                 {
-                    _context.Update(releveCadranRenseignee);
-                    await _context.SaveChangesAsync();
+                    releveCadranNonRenseignee.IndexRoues = releveCadranRenseignee.IndexRoues;
+                    releveCadranNonRenseignee.PrixWatt = releveCadranRenseignee.PrixWatt;
                 }
             }
             // Sauvegarder les changements dans la base de données
@@ -117,11 +121,12 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
     {
         try
         {
-            return await _context.Releves
+            var releve = await _context.Releves
                 .Where(r => r.ReleveId == idReleve)
                 .Include(r => r.ReleveCadrans)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
+            return releve;
         }
         catch (Exception exception)
         {

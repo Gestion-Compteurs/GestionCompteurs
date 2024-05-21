@@ -69,11 +69,9 @@ public class ReleveController(
         try
         {
             var releve = await _releveRepository.TrouverReleveEtRelevesCadran(idReleve);
-            if (releve is not null)
-            {
-                var releveDto = ReleveMapper.ToReleveDtoFromReleveEntity(releve);
-            }  
-            return NotFound("La relève n'existe pas dans cette base de données");
+            if (releve is null) return NotFound("La relève n'existe pas dans cette base de données");
+            var releveDto = ReleveMapper.ToReleveDtoFromReleveEntity(releve);
+            return Ok(releveDto);
         }
         catch (Exception exception)
         {

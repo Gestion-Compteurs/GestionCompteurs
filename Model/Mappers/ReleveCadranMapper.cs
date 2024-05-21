@@ -24,6 +24,7 @@ public static class ReleveCadranMapper
         return new ReleveCadran
         {
             InstanceCadranId = releveCadranModel.InstanceCadranId,
+            ReleveId = releveCadranModel.ReleveId,
             PrixWatt = releveCadranModel.PrixWatt,
             IndexRoues = releveCadranModel.IndexRoues
         };
