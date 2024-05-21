@@ -27,12 +27,12 @@ public class ApplicationDbContext:IdentityDbContext<Administrateur>
         modelBuilder.Entity<IdentityUserToken<string>>().HasKey(x => new { x.UserId, x.LoginProvider, x.Name });
         
         
-        modelBuilder.Entity<IdentityUser>(b =>
+        /*modelBuilder.Entity<IdentityUser>(b =>
         {
             b.Property(u => u.EmailConfirmed).HasColumnType("NUMBER(1)");
             b.Property(u => u.PhoneNumberConfirmed).HasColumnType("NUMBER(1)");
             b.Property(u => u.TwoFactorEnabled).HasColumnType("NUMBER(1)");
             b.Property(u => u.LockoutEnabled).HasColumnType("NUMBER(1)");
-        });
+        });*/
     }
 }

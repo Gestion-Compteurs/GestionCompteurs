@@ -8,11 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
+/*
 // Configuration for accessing the Oracle database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection")));
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>();*/
+
+var connectionString = builder.Configuration.GetConnectionString("sql_server_nihad");
+builder.Services.AddSqlServer<ApplicationDbContext>(connectionString);
+
 var iServiceCollection = builder.Services;
 // Add services to the container.
 

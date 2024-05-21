@@ -3,17 +3,17 @@ using System;
 using GestionCompteursElectriquesMoyenneTension.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Oracle.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
 namespace GestionCompteursElectriquesMoyenneTension.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240521085218_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240521140547_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,68 +23,70 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("GestionCompteursElectriquesMoyenneTension.Model.Entities.Administrateur", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("NVARCHAR2(450)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateDeNaissance")
-                        .HasColumnType("TIMESTAMP(7)");
+                    b.Property<DateOnly>("DateDeNaissance")
+                        .HasColumnType("date");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Nom")
-                        .HasColumnType("NVARCHAR2(2000)");
+                    b.Property<string>("NomAdmin")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("bit");
 
                     b.Property<string>("Prenom")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("BOOLEAN");
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -94,7 +96,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
-                        .HasFilter("\"NormalizedUserName\" IS NOT NULL");
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -103,13 +105,13 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("BatimentId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatimentId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BatimentId"));
 
                     b.Property<string>("Adresse")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BatimentId");
 
@@ -120,28 +122,26 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("CadranId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CadranId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CadranId"));
 
                     b.Property<string>("CadranModel")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("NVARCHAR2(50)");
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("HeureActivation")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(48)");
+                    b.Property<TimeOnly>("HeureActivation")
+                        .HasColumnType("time");
 
-                    b.Property<string>("HeureArret")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(48)");
+                    b.Property<TimeOnly>("HeureArret")
+                        .HasColumnType("time");
 
                     b.Property<int>("NombreRoues")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<double>("PrixWatt")
-                        .HasColumnType("BINARY_DOUBLE");
+                        .HasColumnType("float");
 
                     b.HasKey("CadranId");
 
@@ -152,23 +152,23 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("CompteurId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompteurId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompteurId"));
 
                     b.Property<int>("AnneeCreation")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Marque")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Modele")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("VoltageMax")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.HasKey("CompteurId");
 
@@ -179,18 +179,18 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("InstanceCadranId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstanceCadranId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstanceCadranId"));
 
                     b.Property<int>("CadranId")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<int>("IndexRoues")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<int>("InstanceCompteurId")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.HasKey("InstanceCadranId");
 
@@ -205,19 +205,18 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("InstanceCompteurId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstanceCompteurId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InstanceCompteurId"));
 
                     b.Property<int>("BatimentId")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<int>("CompteurId")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("DateInstallation")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(10)");
+                    b.Property<DateOnly>("DateInstallation")
+                        .HasColumnType("date");
 
                     b.HasKey("InstanceCompteurId");
 
@@ -232,31 +231,31 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("OperateurId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OperateurId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OperateurId"));
 
-                    b.Property<string>("CIN")
+                    b.Property<string>("Cin")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Civilite")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateDeNaissance")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateEmbauche")
-                        .HasColumnType("TIMESTAMP(7)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Nom")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Prenom")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OperateurId");
 
@@ -267,22 +266,21 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("ReleveId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReleveId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReleveId"));
 
                     b.Property<int>("BatimentId")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("DateReleve")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR2(10)");
+                    b.Property<DateOnly>("DateReleve")
+                        .HasColumnType("date");
 
                     b.Property<int>("InstanceCompteurId")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<int>("OperateurId")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.HasKey("ReleveId");
 
@@ -297,18 +295,18 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("ReleveCadranId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReleveCadranId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReleveCadranId"));
 
                     b.Property<int>("IndexRoues")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<int>("InstanceCadranId")
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
                     b.Property<double>("PrixWatt")
-                        .HasColumnType("BINARY_DOUBLE");
+                        .HasColumnType("float");
 
                     b.HasKey("ReleveCadranId");
 
@@ -318,26 +316,26 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("NVARCHAR2(450)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("NVARCHAR2(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("\"NormalizedName\" IS NOT NULL");
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -346,19 +344,19 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(450)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -367,75 +365,23 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("NVARCHAR2(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("NUMBER(10)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TIMESTAMP(7) WITH TIME ZONE");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("NUMBER(1)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("NVARCHAR2(2000)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdentityUser");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(450)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -448,18 +394,18 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("NVARCHAR2(128)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
-                        .HasColumnType("NVARCHAR2(128)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(450)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -471,10 +417,10 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("NVARCHAR2(450)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("NVARCHAR2(450)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -486,18 +432,18 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("NVARCHAR2(450)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("NVARCHAR2(128)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(128)
-                        .HasColumnType("NVARCHAR2(128)");
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
