@@ -62,12 +62,9 @@ public class BatimentController(
     }
 
     [HttpDelete("{id:int:min(1)}")]
-    public IActionResult Delete([FromRoute] int id)
+    public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        var batimentModel = _batimentRepository.DeleteAsync(id);
-        if (batimentModel == null)
-            return NotFound();
-        return NoContent();
+        return Ok(await _batimentRepository.DeleteAsync(id));
     }
     
     // Modifier l'adresse d'un bâtiment

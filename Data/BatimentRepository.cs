@@ -41,14 +41,11 @@ public class BatimentRepository:IBatimentRepository
         return batimentModel;
     }
 
-    public async Task<Batiment?> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id)
     {
-        var batimentModel = await _context.Batiments.FirstOrDefaultAsync(x=>x.BatimentId==id);
-        if (batimentModel == null)
-            return null;
-        _context.Batiments.Remove(batimentModel);
-        await _context.SaveChangesAsync();
-        return batimentModel;
+        return await _context.Batiments
+            .Where(b => b.BatimentId == id)
+            .ExecuteDeleteAsync() >= 1;
     }
 
     public async Task<bool> BatimentExists(int id)

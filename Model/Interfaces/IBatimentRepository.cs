@@ -10,7 +10,7 @@ public interface IBatimentRepository
     Task<Batiment?> GetByIdAsync(int id);
     Task<Batiment> CreateAsync(Batiment batimentModel);
     Task<Batiment?> UpdateAsync(int id,UpdateBatimentRequestDto batimentModel);
-    Task<Batiment?> DeleteAsync(int id);
+    Task<bool> DeleteAsync(int id);
     Task<bool> BatimentExists(int id);
     Task<Batiment?> AjouterInstanceCompteur(AjouterInstanceCompteurRequestDto ajouterInstanceCompteurRequestDto);
     Task<Batiment?> ModifierAdresseBatiment(int idBatiment, string nouvelleAdresse);
