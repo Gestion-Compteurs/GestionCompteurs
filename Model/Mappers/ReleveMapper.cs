@@ -26,6 +26,7 @@ public static class ReleveMapper
         var relevesCadransForDto = releveModel.ReleveCadrans.Select(releveCadran => ReleveCadranMapper.ToReleveCadranDto(releveCadran)).ToList();
         return new ReleveDto
         {
+            
             ReleveId = releveModel.ReleveId,
             // BatimentId = releveModel.BatimentId,
             AgentId = releveModel.OperateurId,

@@ -8,5 +8,5 @@ public class ReleveDto
     public DateOnly DateReleve { get; set; } 
     public int InstanceCompteurId { get; set; }
     public int AgentId { get; set; }
-    public IEnumerable<ReleveCadranDto> ReleveCadrans = new List<ReleveCadranDto>();
+    public IEnumerable<ReleveCadranDto> ReleveCadrans { get; set; } = new List<ReleveCadranDto>();
 }
