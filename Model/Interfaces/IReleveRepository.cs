@@ -13,4 +13,5 @@ public interface IReleveRepository
         ConfirmerCreationNouvelleReleveRequestDto confirmerCreationNouvelleReleveRequestDto);
     Task<Releve?> ModifierReleve(ModifierReleveRequestDto modifierReleveRequestDto);
     Task<Releve?> TrouverReleveEtRelevesCadran(int idReleve);
+    Task<bool> DeleteReleve(int idReleve);
 }

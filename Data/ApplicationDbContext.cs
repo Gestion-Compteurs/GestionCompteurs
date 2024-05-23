@@ -16,6 +16,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<CompteurCadran> CompteurCadrans { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Many to many compteur et cadran
         modelBuilder.Entity<Compteur>()
             .HasMany(compteur => compteur.TypesCadrans)
             .WithMany(cadran => cadran.CompteursLePossedant)

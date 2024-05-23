@@ -2,7 +2,7 @@
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Releve;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
-
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestionCompteursElectriquesMoyenneTension.Data;
@@ -131,6 +131,28 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
         catch (Exception exception)
         {
             Console.WriteLine("Une erreur s'est produite dans le repository de la relève au niveau du listage : " + exception.Message);
+            throw;
+        }
+    }
+
+    public async Task<bool> DeleteReleve(int idReleve)
+    {
+        try
+        {
+            // Supprimer les ReleveCadrans 
+            var del = await context.ReleveCadrans
+                .Where(rc => rc.ReleveId == idReleve)
+                .ExecuteDeleteAsync();
+            // Supprimer la Releve
+            var rowsDeleted = await context.Releves
+                .Where(r => r.ReleveId == idReleve)
+                .ExecuteDeleteAsync();
+            Console.WriteLine(rowsDeleted);
+            return rowsDeleted > 0;
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine("Une erreur s'est produite dans le repository de la relève au niveau de la suppression de la relève : " + exception.Message);
             throw;
         }
     }

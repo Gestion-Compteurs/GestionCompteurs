@@ -13,5 +13,6 @@ public class Releve
     // public int BatimentId { get; set; }
     [Required]
     public int OperateurId { get; set; }
+    
     public IEnumerable<ReleveCadran> ReleveCadrans { get; set; } = new List<ReleveCadran>();
 }

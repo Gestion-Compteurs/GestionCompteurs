@@ -113,4 +113,22 @@ public class ReleveController(
             return StatusCode(500); 
         }
     }
+    
+    // Supprimer une relève
+    [HttpDelete("{idReleve}")]
+    public async Task<IActionResult> DeleteReleve(
+        [FromRoute] int idReleve
+    )
+    {
+        try
+        {
+            var deleted = await _releveRepository.DeleteReleve(idReleve);
+            return deleted ? Ok(deleted) : NotFound("Cette relève n'existe pas");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("Une erreur s'est produite lors de la suppression de la relève " + exception.Message); 
+            return StatusCode(500); 
+        }
+    }
 }

@@ -44,6 +44,7 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
         try
         {
             return await _context.InstanceCompteurs
+                .Where(i => i.InstanceCompteurId == idInstanceCompteur)
                 .Include(i => i.Releves)
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
