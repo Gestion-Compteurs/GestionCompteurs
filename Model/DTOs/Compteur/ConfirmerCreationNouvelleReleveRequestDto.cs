@@ -5,5 +5,5 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs;
 public class ConfirmerCreationNouvelleReleveRequestDto
 {
     public int ReleveId { get; set; }
-    public IEnumerable<ReleveCadranDto> ReleveCadranDtos { get; set; } = new List<ReleveCadranDto>();
+    public IEnumerable<ReleveCadranDto> ReleveCadrans { get; set; } = new List<ReleveCadranDto>();
 }

@@ -73,7 +73,7 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
         try
         { 
             // Mettre à jours toutes les rèleves cadrans envoyées
-            foreach (var releveCadranRenseignee in confirmerCreationNouvelleReleveRequestDto.ReleveCadranDtos)
+            foreach (var releveCadranRenseignee in confirmerCreationNouvelleReleveRequestDto.ReleveCadrans)
             {
                 var releveCadranNonRenseignee = await _context.ReleveCadrans
                     .Where(rc => rc.ReleveCadranId == releveCadranRenseignee.ReleveCadranId)
