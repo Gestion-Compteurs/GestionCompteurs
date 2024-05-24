@@ -11,4 +11,5 @@ public class CadranDto
     public TimeOnly HeureArret { get; set; }
     public string CadranModel { get; set; } = Constants.UnknownString;
     public IEnumerable<CompteurDto> CompteursLePossedant { get; set; } = new List<CompteurDto>();
+
 }

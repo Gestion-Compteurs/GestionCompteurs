@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d089ca07-465e-4fd0-85b3-25c4ca9eaa1c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.vs/GestionCompteurs/FileContentIndex/9699bdd5-df02-49bd-9981-92bfedcd0bb9.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/GestionCompteurs/FileContentIndex/d69fd7a9-4a37-4df7-9277-86953e2f7d52.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/GestionCompteurs/v17/.wsuo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/GestionCompteurs/v17/.wsuo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/GestionCompteurs/v17/DocumentLayout.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/GestionCompteurs/v17/DocumentLayout.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/VSWorkspaceState.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/VSWorkspaceState.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/slnx.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/slnx.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.exe" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/GestionCompteursElectriquesMoyenneTension.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/ref/GestionCompteursElectriquesMoyenneTension.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/ref/GestionCompteursElectriquesMoyenneTension.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net8.0/refint/GestionCompteursElectriquesMoyenneTension.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net8.0/refint/GestionCompteursElectriquesMoyenneTension.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/GestionCompteursElectriquesMoyenneTension.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/GestionCompteursElectriquesMoyenneTension.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Release/net8.0/GestionCompteursElectriquesMoyenneTension.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Release/net8.0/GestionCompteursElectriquesMoyenneTension.AssemblyInfoInputs.cache" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2gSpqegYMOeJ24MnrZ7w4LlWjmU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "nihad1",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/EL-OTHEMANY/Downloads/CompteurElectrique",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d089ca07-465e-4fd0-85b3-25c4ca9eaa1c" name="Changes" comment="" />
+      <created>1715701025950</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715701025950</updated>
+    </task>
+    <servers />
+  </component>
+</project>

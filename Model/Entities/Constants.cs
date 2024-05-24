@@ -2,5 +2,5 @@
 
 public static class Constants
 {
-    public static string UnknownString { get; } = "NA";
+    public static string? UnknownString { get; } = "NA";
 }

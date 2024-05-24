@@ -7,7 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.5" />
+        <PackageReference Include="Microsoft.Build.Framework" Version="17.10.0-preview-24081-01" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
           <PrivateAssets>all</PrivateAssets>
@@ -19,6 +22,9 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0-preview.2.24128.5" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+        <PackageReference Include="Oracle.EntityFrameworkCore" Version="8.23.40" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
@@ -28,6 +34,41 @@
       <Folder Include="Security\Model\DTOs\" />
       <Folder Include="Security\Model\Entities\" />
       <Folder Include="Security\Service\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Login.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Register.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\LICENSE" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\LICENSE.md" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_LoginPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewImports.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_ViewStart.cshtml" />
     </ItemGroup>
 
 </Project>

@@ -1,9 +1,14 @@
 using GestionBatimentsElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Data;
+using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 /*
 builder.Services.AddDbContext<ApplicationDbContext>(
@@ -14,8 +19,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 // Configurer l'injection de dépendances pour le contexte de la base de données
 var connectionString = builder.Configuration.GetConnectionString("sql_server_hassane");
 builder.Services.AddSqlServer<ApplicationDbContext>(connectionString);
-var iServiceCollection = builder.Services;
 
+/*
+// Configuration for accessing the Oracle database
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection")));
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();*/
+
+var iServiceCollection = builder.Services;
 
 // Add services to the container.
 
@@ -32,6 +44,19 @@ builder.Services.AddScoped<IInstanceCompteurRepository, InstanceCompteurReposito
 builder.Services.AddScoped<IInstanceCadranRepository, InstanceCadranRepository>();
 builder.Services.AddScoped<IReleveCadranRepository, ReleveCadranRepository>();
 builder.Services.AddScoped<IReleveRepository, ReleveRepository>();
+builder.Services.AddScoped<IOperateurRepository, OperateurRepository>();
+builder.Services.AddIdentity<Administrateur,IdentityRole>(
+    options =>
+    {
+        options.Password.RequiredUniqueChars = 0;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredLength = 8;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireLowercase = false;
+    }
+   
+    ).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
 
 var app = builder.Build();
 

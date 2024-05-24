@@ -11,4 +11,5 @@ public class Batiment
     public int NombreEtages { get; set; }
     [AllowedValues("Maison", "Immeuble")] 
     public string TypeBatiment { get; set; } = Constants.UnknownString;
+
 }

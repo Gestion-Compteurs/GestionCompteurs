@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionCompteursElectriquesMoyenneTension")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df7e55b8e3163b3358fcc4e01df0780b9d1a6818")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+348a70cf68b97b0e298b3be43f67ab6a560c2975")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionCompteursElectriquesMoyenneTension")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionCompteursElectriquesMoyenneTension")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

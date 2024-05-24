@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+<<<<<<< HEAD
     <data-source source="LOCAL" name="identifier.sqlite" uuid="f625daf2-bcdc-48d6-87c5-63cc2c66fa39">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:identifier.sqlite</jdbc-url>
+=======
+    <data-source source="LOCAL" name="data" uuid="49d5cbec-42fa-4c91-ba16-68f910391e9b">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\EL-OTHEMANY\GestionCompteurs\data.db</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+      </jdbc-additional-properties>
+>>>>>>> origin/nihad3
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

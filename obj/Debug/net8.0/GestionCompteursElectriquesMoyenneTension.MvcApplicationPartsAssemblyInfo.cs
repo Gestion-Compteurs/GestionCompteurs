@@ -10,6 +10,10 @@
 using System;
 using System.Reflection;
 
+<<<<<<< HEAD
+=======
+[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Microsoft.AspNetCore.Identity.UI")]
+>>>>>>> origin/nihad3
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Swashbuckle.AspNetCore.SwaggerGen")]
 
 // Généré par la classe MSBuild WriteCodeFragment.
