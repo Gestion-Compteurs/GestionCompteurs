@@ -9,7 +9,7 @@ public class ReleveCadran
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ReleveCadranId { get; set; }
     // Relève correspondante
-    public int ReleveId { get; set; }
+    public int? ReleveId { get; set; }
     [Required] public int IndexRoues { get; set; }= 0;
     [Required] public int InstanceCadranId { get; set; }
     [Required] public double PrixWatt{ get; set; } 

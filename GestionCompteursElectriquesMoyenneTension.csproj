@@ -24,10 +24,6 @@
 
     <ItemGroup>
       <Folder Include="Migrations\" />
-      <Folder Include="Security\Controllers\" />
-      <Folder Include="Security\Model\DTOs\" />
-      <Folder Include="Security\Model\Entities\" />
-      <Folder Include="Security\Service\" />
     </ItemGroup>
 
 </Project>
