@@ -6,8 +6,8 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 
 public interface IRegieRepository
 {
-    Task<bool?> UnlockAdministrateur(LoginRequest loginRequest);
-    Task<IEnumerable<Administrateur?>?> ListAllAdministrateurs();
-    Task<IEnumerable<Administrateur?>?> ListAllAgents();
+    Task<bool?> UnlockAdministrateur(int administrateurId);
+    Task<IEnumerable<Administrateur?>?> ListAllAdministrateurs(int regieId);
+    Task<IEnumerable<Operateur?>?> ListAllAgents(int regieId);
     Task<Regie?> Authenticate(RegisterRequest tokenGenerationRequest);
 }

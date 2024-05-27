@@ -27,11 +27,17 @@ public class RegieRepository(
             throw;
         }
     }
-    public async Task<bool?> UnlockAdministrateur(LoginRequest loginRequest)
+    public async Task<bool?> UnlockAdministrateur(int administrateurId)
     {
         try
         {
-            throw new NotImplementedException();
+            var administrateur = await context.Administrateurs
+                .Where(a => a.AdminId == administrateurId)
+                .FirstOrDefaultAsync();
+            if (administrateur == null) return false;
+            administrateur.CompteActif = true;
+            await context.SaveChangesAsync();
+            return true;
         }
         catch (Exception exception)
         {
@@ -40,11 +46,14 @@ public class RegieRepository(
         }
     }
 
-    public async Task<IEnumerable<Administrateur?>?> ListAllAdministrateurs()
+    public async Task<IEnumerable<Administrateur?>?> ListAllAdministrateurs(int regieId)
     {
         try
         {
-            throw new NotImplementedException();
+            return await context.Administrateurs
+                .Where(a => a.RegieId == regieId)
+                .AsNoTracking()
+                .ToListAsync();
         }
         catch (Exception exception)
         {
@@ -53,11 +62,15 @@ public class RegieRepository(
         }
     }
 
-    public async Task<IEnumerable<Administrateur?>?> ListAllAgents()
+    public async Task<IEnumerable<Operateur?>?> ListAllAgents(int regieId)
     {
         try
         {
-            throw new NotImplementedException();
+            var operateurs = await context.Operateurs
+                .Where(o => o.RegieId == regieId)
+                .AsNoTracking()
+                .ToListAsync();
+            return operateurs;
         }
         catch (Exception exception)
         {

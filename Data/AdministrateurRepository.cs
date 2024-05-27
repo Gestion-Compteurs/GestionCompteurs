@@ -23,7 +23,7 @@ public class AdministrateurRepository(
             {
                 UserName = registerRequest.Email,
                 Password = SecurityMethods.HashPassword(registerRequest.Password),
-                NomAdmin = registerRequest.Nom,
+                Nom = registerRequest.Nom,
                 Prenom = registerRequest.Prenom,
                 DateDeNaissance = registerRequest.DateDeNaissance
             };
@@ -49,7 +49,7 @@ public class AdministrateurRepository(
                 .Where(a => a.Email == tokenGenerationRequest.Email 
                             && 
                             a.PasswordHash == hashedPassword).FirstOrDefaultAsync();
-            return administrateur ?? null;
+            return administrateur is { CompteActif: true } ? administrateur : null;
         }
         catch (Exception exception)
         {
