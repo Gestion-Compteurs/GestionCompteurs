@@ -1,4 +1,5 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Compteur;
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Releve;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;

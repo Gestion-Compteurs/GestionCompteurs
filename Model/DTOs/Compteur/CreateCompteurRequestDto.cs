@@ -1,4 +1,4 @@
-﻿namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+﻿namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Compteur;
 
 public class CreateCompteurRequestDto
 {

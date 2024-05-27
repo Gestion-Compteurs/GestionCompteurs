@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
-using GestionCompteursElectriquesMoyenneTension.ViewModels;
+using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+using GestionCompteursElectriquesMoyenneTension.Security.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,57 +10,53 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AdministrateurController : ControllerBase
+public class AdministrateurController(IAdministrateurRepository administrateurRepository) : ControllerBase
 {
-    private readonly UserManager<Administrateur> _userManager;
-    private readonly SignInManager<Administrateur> _signInManager;
-
-    public AdministrateurController(UserManager<Administrateur> userManager, SignInManager<Administrateur> signInManager)
-    {
-        _userManager = userManager;
-        _signInManager = signInManager;
-    }
-
+    private readonly IAdministrateurRepository _administrateurRepository = administrateurRepository;
+    
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterVM model)
+    public async Task<IActionResult> Register([FromBody] RegisterRequest model)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-
-        var user = new Administrateur
+        try
         {
-            UserName = model.Email,
-            NomAdmin = model.Nom,
-            Prenom = model.Prenom,
-            DateDeNaissance = model.DateDeNaissance
-        };
-
-        Debug.Assert(model.Password != null, "model.Password != null");
-        var result = await _userManager.CreateAsync(user, model.Password);
-
-        if (result.Succeeded)
-        {
-            return Ok(new { Message = "User registered successfully" });
+            var result = await _administrateurRepository.Register(model);
+            if (result is { Succeeded: true })
+            {
+                return Ok(new { Message = "User registered successfully" });
+            }
+            return BadRequest(result?.Errors);
         }
-
-        return BadRequest(result.Errors);
+        catch (Exception exception)
+        {
+            Console.WriteLine($"Une erreur s'est produite dans le controlleur de l'administrateur au niveau du login {exception.Message}");
+            throw;
+        }
     }
-
-
+    
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginVM model)
+    public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
-        Debug.Assert(model.Email != null, "model.Email != null");
-        Debug.Assert(model.Password != null, "model.Password != null");
-        var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-
-        if (result.Succeeded)
+        if (!ModelState.IsValid)
         {
-            return Ok(new { Message = "User logged in successfully" });
+            return BadRequest(ModelState);
         }
-
-        return Unauthorized();
+        try
+        {
+            var result = await _administrateurRepository.Login(loginRequest);
+            if (result is { Succeeded: true })
+            {
+                return Ok(new { Message = "User logged in successfully" });
+            }
+            return Unauthorized();
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine($"Une erreur s'est produite dans le controlleur de l'administrateur au niveau du register {exception.Message}");
+            throw;
+        }
     }
 }

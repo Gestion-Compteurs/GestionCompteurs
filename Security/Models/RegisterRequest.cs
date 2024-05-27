@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GestionCompteursElectriquesMoyenneTension.ViewModels;
+namespace GestionCompteursElectriquesMoyenneTension.Security.Models;
 
-public class RegisterVM
+public class RegisterRequest
 {
-    public RegisterVM(string? nom, string? prenom, DateOnly dateDeNaissance, string? confirmPassword)
+    public RegisterRequest(string? nom, string? prenom, DateOnly dateDeNaissance, string? confirmPassword)
     {
         Nom = nom;
         Prenom = prenom;

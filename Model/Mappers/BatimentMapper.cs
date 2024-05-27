@@ -1,9 +1,7 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Batiment;
-using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
-using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 
-namespace GestionBatimentsElectriquesMoyenneTension.Model.Mappers;
+namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 
 public static class BatimentMapper
 {

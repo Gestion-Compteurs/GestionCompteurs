@@ -1,7 +1,9 @@
-using GestionBatimentsElectriquesMoyenneTension.Data;
+using System.Text;
 using GestionCompteursElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,28 @@ var iServiceCollection = builder.Services;
 
 // Add services to the container.
 
+// Ajouter l'authentification
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]!)),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
+    };
+} );
+// Ajouter l'autorisation
+builder.Services.AddAuthorization();
+
 iServiceCollection.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 iServiceCollection.AddEndpointsApiExplorer();
@@ -32,6 +56,8 @@ builder.Services.AddScoped<IInstanceCompteurRepository, InstanceCompteurReposito
 builder.Services.AddScoped<IInstanceCadranRepository, InstanceCadranRepository>();
 builder.Services.AddScoped<IReleveCadranRepository, ReleveCadranRepository>();
 builder.Services.AddScoped<IReleveRepository, ReleveRepository>();
+builder.Services.AddScoped<IAdministrateurRepository, AdministrateurRepository>();
+builder.Services.AddScoped<IRegieRepository, RegieRepository>();
 
 var app = builder.Build();
 

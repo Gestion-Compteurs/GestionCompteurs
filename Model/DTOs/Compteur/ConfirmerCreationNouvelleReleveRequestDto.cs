@@ -1,6 +1,6 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.ReleveCadran;
 
-namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Compteur;
 
 public class ConfirmerCreationNouvelleReleveRequestDto
 {

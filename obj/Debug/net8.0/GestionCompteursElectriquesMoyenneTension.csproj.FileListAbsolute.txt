@@ -175,3 +175,4 @@ C:\Mamane Hassane\Somei\GestionCompteursElectriquesMoyenneTension\obj\Debug\net8
 C:\Mamane Hassane\Somei\GestionCompteursElectriquesMoyenneTension\obj\Debug\net8.0\GestionCompteursElectriquesMoyenneTension.pdb
 C:\Mamane Hassane\Somei\GestionCompteursElectriquesMoyenneTension\obj\Debug\net8.0\GestionCompteursElectriquesMoyenneTension.genruntimeconfig.cache
 C:\Mamane Hassane\Somei\GestionCompteursElectriquesMoyenneTension\obj\Debug\net8.0\ref\GestionCompteursElectriquesMoyenneTension.dll
+C:\Mamane Hassane\Somei\GestionCompteursElectriquesMoyenneTension\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

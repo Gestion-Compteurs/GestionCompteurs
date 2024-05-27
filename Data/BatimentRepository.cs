@@ -1,12 +1,9 @@
-﻿
-using GestionCompteursElectriquesMoyenneTension.Data;
-using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Batiment;
-using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Batiment;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace GestionBatimentsElectriquesMoyenneTension.Data;
+namespace GestionCompteursElectriquesMoyenneTension.Data;
 
 public class BatimentRepository:IBatimentRepository
 {

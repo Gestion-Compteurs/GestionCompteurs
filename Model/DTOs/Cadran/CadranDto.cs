@@ -1,4 +1,5 @@
-﻿using GestionCompteursElectriquesMoyenneTension.Model.Entities;
+﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Compteur;
+using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
 namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Cadran;
 
