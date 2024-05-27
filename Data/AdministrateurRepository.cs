@@ -1,59 +1,60 @@
 ﻿using System.Diagnostics;
+using System.Security.Cryptography;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+using GestionCompteursElectriquesMoyenneTension.Security.Methods;
 using GestionCompteursElectriquesMoyenneTension.Security.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestionCompteursElectriquesMoyenneTension.Data;
 
 public class AdministrateurRepository(
-    UserManager<Administrateur> userManager,
-    SignInManager<Administrateur> signInManager
+    ApplicationDbContext context
         ) : IAdministrateurRepository
 {
-    public async Task<IdentityResult?> Register(RegisterRequest registerRequest)
+    public async Task<Administrateur?> Register(RegisterRequest registerRequest)
     {
         try
         {
-            var user = new Administrateur
+            if (registerRequest is { Password: null })
+                return null;
+            var administrateur = new Administrateur
             {
                 UserName = registerRequest.Email,
+                Password = SecurityMethods.HashPassword(registerRequest.Password),
                 NomAdmin = registerRequest.Nom,
                 Prenom = registerRequest.Prenom,
                 DateDeNaissance = registerRequest.DateDeNaissance
             };
-
-            Debug.Assert(registerRequest.Password != null, "registerRequest.Password != null");
-            var result = await userManager.CreateAsync(user, registerRequest.Password);
-            return result;
-
+            await context.Administrateurs.AddAsync(administrateur);
+            await context.SaveChangesAsync();
+            return administrateur;
         }
         catch (Exception exception)
         {
             Console.WriteLine($"Une exception s'est produite dans le repository de l'administrateur au niveau du register : {exception}");
             throw;
         }
-        
     }
 
-    public async Task<SignInResult?> Login(LoginRequest loginRequest)
+    public async Task<Administrateur?> Authenticate(LoginRequest tokenGenerationRequest)
     {
         try
         {
-            Debug.Assert(loginRequest.Email != null, "loginRequest.Email != null");
-            Debug.Assert(loginRequest.Password != null, "loginRequest.Password != null");
-            var result = await signInManager.PasswordSignInAsync(loginRequest.Email, loginRequest.Password, false, false);
-            return result;
+            if (tokenGenerationRequest is { Password: null })
+                return null;
+            var hashedPassword = SecurityMethods.HashPassword(tokenGenerationRequest.Password);
+            var administrateur = await context.Administrateurs
+                .Where(a => a.Email == tokenGenerationRequest.Email 
+                            && 
+                            a.PasswordHash == hashedPassword).FirstOrDefaultAsync();
+            return administrateur ?? null;
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Une exception s'est produite dans le repository de l'administrateur au niveau du login : {exception}");
+            Console.WriteLine($"Une exception s'est produite dans le repository de l'administrateur au niveau de l'authentification : {exception}");
             throw;
         }
-    }
-
-    public async Task<Administrateur> Authenticate(LoginRequest tokenGenerationRequest)
-    {
-        throw new NotImplementedException();
     }
 }

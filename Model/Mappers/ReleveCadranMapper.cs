@@ -7,7 +7,6 @@ public static class ReleveCadranMapper
 {
     public static ReleveCadranDto ToReleveCadranDto(this ReleveCadran releveCadranModel)
     {
-        
         return new ReleveCadranDto
         {
             ReleveCadranId = releveCadranModel.ReleveCadranId,

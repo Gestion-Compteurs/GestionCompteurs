@@ -17,8 +17,8 @@ public class ApplicationDbContext:IdentityDbContext<Administrateur>
     public DbSet<Releve> Releves { get; set; }
     public DbSet<CompteurCadran> CompteurCadrans { get; set; }
     public DbSet<Operateur> Operateurs { get; set; }
-    
     public DbSet<Administrateur> Administrateurs { get; set; }
+    public DbSet<Regie> Regies { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

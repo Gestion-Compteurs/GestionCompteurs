@@ -6,7 +6,6 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 
 public interface IAdministrateurRepository
 {
-    Task<IdentityResult?> Register(RegisterRequest registerRequest);
-    Task<SignInResult?> Login(LoginRequest loginRequest);
-    Task<Administrateur> Authenticate(LoginRequest tokenGenerationRequest);
+    Task<Administrateur?> Register(RegisterRequest registerRequest);
+    Task<Administrateur?> Authenticate(LoginRequest tokenGenerationRequest);
 }
