@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore;
 namespace GestionCompteursElectriquesMoyenneTension.Data;
 
 public class AdministrateurRepository(
-    ApplicationDbContext context
-        ) : IAdministrateurRepository
+    ApplicationDbContext context,
+    IPasswordHasher<Administrateur> passwordHasher) : IAdministrateurRepository
 {
     public async Task<Administrateur?> Register(RegisterRequest registerRequest)
     {
@@ -22,12 +22,16 @@ public class AdministrateurRepository(
             var administrateur = new Administrateur
             {
                 UserName = registerRequest.Email,
-                Password = SecurityMethods.HashPassword(registerRequest.Password),
+                Email = registerRequest.Email,
+                Password = registerRequest.Password,
+                PasswordHash = "",
                 RegieId = registerRequest.RegieId,
                 Nom = registerRequest.Nom,
                 Prenom = registerRequest.Prenom,
                 DateDeNaissance = registerRequest.DateDeNaissance
             };
+            if (registerRequest.Password != null)
+                administrateur.PasswordHash = passwordHasher.HashPassword(administrateur, registerRequest.Password);
             await context.Administrateurs.AddAsync(administrateur);
             await context.SaveChangesAsync();
             return administrateur;
@@ -45,15 +49,16 @@ public class AdministrateurRepository(
         {
             if (tokenGenerationRequest is { Password: null })
                 return null;
-            var hashedPassword = SecurityMethods.HashPassword(tokenGenerationRequest.Password);
             var administrateur = await context.Administrateurs
                 .Where(a => a.Email == tokenGenerationRequest.Email 
-                            && 
-                            a.Password == hashedPassword
+                            || a.UserName == tokenGenerationRequest.Email
                             &&
                             a.RegieId == tokenGenerationRequest.RegieId
-                            ).FirstOrDefaultAsync();
-            return administrateur is { CompteActif: true } ? administrateur : null;
+                            ).FirstOrDefaultAsync(); 
+            var passwordCorrect = passwordHasher.VerifyHashedPassword(administrateur, administrateur.PasswordHash,
+                tokenGenerationRequest.Password);
+            if(passwordCorrect>0)  return administrateur is { CompteActif: true } ? administrateur : null;
+            return null;
         }
         catch (Exception exception)
         {

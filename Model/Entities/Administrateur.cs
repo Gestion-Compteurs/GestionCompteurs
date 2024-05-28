@@ -17,6 +17,6 @@ public class Administrateur: IdentityUser
     public bool? CompteActif { get; set; }
     [Required]
     [StringLength(20,ErrorMessage = "Le mot de passe doit avoir entre 8 et 20 caractères",MinimumLength = 8)]
-    public required string Password { get; set; }
+    public required string? Password { get; set; }
     public DateOnly DateDeNaissance { get; set; }
 }
