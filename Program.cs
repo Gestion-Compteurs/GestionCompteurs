@@ -2,6 +2,7 @@ using System.Text;
 using GestionCompteursElectriquesMoyenneTension.Data;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
+using GestionCompteursElectriquesMoyenneTension.Security.Methods;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -60,7 +61,7 @@ builder.Services.AddScoped<IReleveCadranRepository, ReleveCadranRepository>();
 builder.Services.AddScoped<IReleveRepository, ReleveRepository>();
 builder.Services.AddScoped<IAdministrateurRepository, AdministrateurRepository>();
 builder.Services.AddScoped<IRegieRepository, RegieRepository>();
-builder.Services.AddScoped<IPasswordHasher<Administrateur>, PasswordHasher<Administrateur>>();
+builder.Services.AddScoped<IPasswordHasher<Administrateur>, AdminPasswordHasher>();
 
 var app = builder.Build();
 

@@ -22,7 +22,7 @@ public class IdentityController(
     // Méthode d'authentification des clients, accessible par tout le monde
     [AllowAnonymous]
     [HttpPost("authenticateAdminAndGetAccessToken")]
-    public async Task<IActionResult> GenerateTokenForCustomer([FromBody] LoginRequest tokenGenerationRequest)
+    public async Task<IActionResult> GenerateTokenForAdmin([FromBody] LoginRequest tokenGenerationRequest)
     {
         if (!ModelState.IsValid)
         {
@@ -57,7 +57,7 @@ public class IdentityController(
             Expires = DateTime.UtcNow.Add(StaticSecurityDatas.TokenLifeTime),
             Issuer = StaticSecurityDatas.Issuer,
             Audience = StaticSecurityDatas.Audience,
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),StaticSecurityDatas.SecurityAlgorithmForCustomers)
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),StaticSecurityDatas.SecurityAlgorithmForAdmins)
 
         };
     
@@ -81,7 +81,7 @@ public class IdentityController(
     // Méthode d'authentification des régies, accessible par tout le monde
     [AllowAnonymous]
     [HttpPost("authenticateRegieAndGetAccessToken")]
-    public async Task<IActionResult> GenerateTokenForAdmin([FromBody] LoginRequest tokenGenerationRequest)
+    public async Task<IActionResult> GenerateTokenForRegie([FromBody] LoginRequest tokenGenerationRequest)
     {
         if (!ModelState.IsValid)
         {
@@ -114,7 +114,7 @@ public class IdentityController(
             Expires = DateTime.UtcNow.Add(StaticSecurityDatas.TokenLifeTime),
             Issuer = StaticSecurityDatas.Issuer,
             Audience = StaticSecurityDatas.Audience,
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),StaticSecurityDatas.SecurityAlgorithmForAdministrators)
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),StaticSecurityDatas.SecurityAlgorithmForRegies)
         };
         
         // Génération du token à partir du descripteur

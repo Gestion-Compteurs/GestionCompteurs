@@ -11,7 +11,8 @@ namespace GestionCompteursElectriquesMoyenneTension.Data;
 
 public class AdministrateurRepository(
     ApplicationDbContext context,
-    IPasswordHasher<Administrateur> passwordHasher) : IAdministrateurRepository
+    IPasswordHasher<Administrateur> passwordHasher
+    ) : IAdministrateurRepository
 {
     public async Task<Administrateur?> Register(RegisterRequest registerRequest)
     {
@@ -55,8 +56,8 @@ public class AdministrateurRepository(
                             &&
                             a.RegieId == tokenGenerationRequest.RegieId
                             ).FirstOrDefaultAsync(); 
-            var passwordCorrect = passwordHasher.VerifyHashedPassword(administrateur, administrateur.PasswordHash,
-                tokenGenerationRequest.Password);
+            var passwordCorrect = passwordHasher.VerifyHashedPassword(administrateur, administrateur.PasswordHash, tokenGenerationRequest.Password);
+            Console.WriteLine(passwordCorrect);
             if(passwordCorrect>0)  return administrateur is { CompteActif: true } ? administrateur : null;
             return null;
         }

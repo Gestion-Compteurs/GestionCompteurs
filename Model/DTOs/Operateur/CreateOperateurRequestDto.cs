@@ -11,7 +11,8 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
 
         [Required]
         public string? Prenom { get; set; }= Constants.UnknownString;
-
+        [Required]
+        public int? RegieId { get; set; }
         [Required]
         public string? CIN { get; set; }= Constants.UnknownString;
         [Required]
