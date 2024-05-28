@@ -17,11 +17,13 @@ public class AdministrateurController(IAdministrateurRepository administrateurRe
     {
         try
         {
-
+            var authenticateRequestBody = await _administrateurRepository.Authenticate(loginRequest);
+            if (authenticateRequestBody is not null) return Ok(authenticateRequestBody);
+            return NotFound("Mot de passe ou nom d'utilisateur incorrect");
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de l'administrateur au niveau de AuthenticateAdmin");
+            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de l'administrateur au niveau de AuthenticateAdmin {exception}");
             throw;
         }
     }

@@ -9,5 +9,5 @@ public interface IRegieRepository
     Task<bool?> UnlockAdministrateur(int administrateurId, int regieId);
     Task<IEnumerable<Administrateur?>?> ListAllAdministrateurs(int regieId);
     Task<IEnumerable<Operateur?>?> ListAllAgents(int regieId);
-    Task<Regie?> Authenticate(RegisterRequest tokenGenerationRequest);
+    Task<Regie?> Authenticate(LoginRequest tokenGenerationRequest);
 }

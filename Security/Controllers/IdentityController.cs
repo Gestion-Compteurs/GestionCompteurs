@@ -81,7 +81,7 @@ public class IdentityController(
     // Méthode d'authentification des régies, accessible par tout le monde
     [AllowAnonymous]
     [HttpPost("authenticateRegieAndGetAccessToken")]
-    public async Task<IActionResult> GenerateTokenForAdmin([FromBody] RegisterRequest tokenGenerationRequest)
+    public async Task<IActionResult> GenerateTokenForAdmin([FromBody] LoginRequest tokenGenerationRequest)
     {
         if (!ModelState.IsValid)
         {

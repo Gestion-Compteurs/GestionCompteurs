@@ -17,11 +17,13 @@ public class RegieController(IRegieRepository regieRepository) : ControllerBase
     {
         try
         {
-
+            var authenticateRequestBody = await _regieRepository.Authenticate(loginRequest);
+            if (authenticateRequestBody is not null) return Ok(authenticateRequestBody);
+            return NotFound("Mot de passe ou nom d'utilisateur incorrect");
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de AuthenticateRegie");
+            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de AuthenticateRegie {exception}");
             throw;
         }
     }
@@ -34,11 +36,13 @@ public class RegieController(IRegieRepository regieRepository) : ControllerBase
     {
         try
         {
-
+            var adminUnlocked = await _regieRepository.UnlockAdministrateur(administrateurId, regieId);
+            if (adminUnlocked is true) return Ok("Administrateur débloqué avec succèes !");
+            return StatusCode(StatusCodes.Status417ExpectationFailed);
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de UnlockAdministrateur");
+            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de UnlockAdministrateur {exception}");
             throw;
         }
     }
@@ -50,11 +54,12 @@ public class RegieController(IRegieRepository regieRepository) : ControllerBase
     {
         try
         {
-
+            var administrateurs = await _regieRepository.ListAllAdministrateurs(regieId);
+            return Ok(administrateurs);
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de ListAllAdministrateurs");
+            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de ListAllAdministrateurs {exception}");
             throw;
         }
     }
@@ -66,11 +71,12 @@ public class RegieController(IRegieRepository regieRepository) : ControllerBase
     {
         try
         {
-
+            var agents = await _regieRepository.ListAllAgents(regieId);
+            return Ok(agents);
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de ListAllAgents");
+            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de ListAllAgents {exception}");
             throw;
         }
     }

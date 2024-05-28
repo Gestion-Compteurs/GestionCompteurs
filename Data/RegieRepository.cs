@@ -9,7 +9,7 @@ public class RegieRepository(
     ApplicationDbContext context
     ): IRegieRepository
 {
-    public async Task<Regie?> Authenticate(RegisterRequest tokenGenerationRequest)
+    public async Task<Regie?> Authenticate(LoginRequest tokenGenerationRequest)
     {
         try
         {
