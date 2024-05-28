@@ -27,14 +27,14 @@ public class RegieRepository(
             throw;
         }
     }
-    public async Task<bool?> UnlockAdministrateur(int administrateurId)
+    public async Task<bool?> UnlockAdministrateur(int administrateurId, int regieId)
     {
         try
         {
             var administrateur = await context.Administrateurs
                 .Where(a => a.AdminId == administrateurId)
                 .FirstOrDefaultAsync();
-            if (administrateur == null) return false;
+            if (administrateur is null || administrateur.RegieId != regieId) return false;
             administrateur.CompteActif = true;
             await context.SaveChangesAsync();
             return true;

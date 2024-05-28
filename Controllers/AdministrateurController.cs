@@ -21,7 +21,7 @@ public class AdministrateurController(IAdministrateurRepository administrateurRe
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Une erreur ");
+            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de l'administrateur au niveau de AuthenticateAdmin");
             throw;
         }
     }
