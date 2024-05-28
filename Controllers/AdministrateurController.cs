@@ -10,20 +10,20 @@ public class AdministrateurController(IAdministrateurRepository administrateurRe
 {
     private readonly IAdministrateurRepository _administrateurRepository = administrateurRepository;
 
-    [HttpPost("Authenticate")]
-    public async Task<IActionResult> AuthenticateAdmin(
-        [FromBody] LoginRequest loginRequest
+    [HttpPost("Register")]
+    public async Task<IActionResult> RegisterAdmin(
+        [FromBody] RegisterRequest registerRequest
     )
     {
         try
         {
-            var authenticateRequestBody = await _administrateurRepository.Authenticate(loginRequest);
-            if (authenticateRequestBody is not null) return Ok(authenticateRequestBody);
-            return NotFound("Mot de passe ou nom d'utilisateur incorrect");
+            var registerRequestBody = await _administrateurRepository.Register(registerRequest);
+            if (registerRequestBody is not null) return Ok(registerRequestBody);
+            return StatusCode(StatusCodes.Status417ExpectationFailed);
         }
         catch (Exception exception)
         {
-            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de l'administrateur au niveau de AuthenticateAdmin {exception}");
+            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de l'administrateur au niveau de RegisterAdmin {exception}");
             throw;
         }
     }

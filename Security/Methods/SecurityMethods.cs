@@ -15,6 +15,6 @@ public class SecurityMethods
             prf: KeyDerivationPrf.HMACSHA256,
             iterationCount: 100000,
             numBytesRequested: 256 / 8));
-        return hashed;
+        return hashed[..20];
     }
 }

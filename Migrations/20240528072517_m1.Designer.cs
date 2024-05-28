@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionCompteursElectriquesMoyenneTension.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240527191710_m10")]
-    partial class m10
+    [Migration("20240528072517_m1")]
+    partial class m1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

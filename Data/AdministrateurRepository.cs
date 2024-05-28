@@ -17,12 +17,13 @@ public class AdministrateurRepository(
     {
         try
         {
-            if (registerRequest is { Password: null })
+            if (registerRequest?.RegieId is null)
                 return null;
             var administrateur = new Administrateur
             {
                 UserName = registerRequest.Email,
                 Password = SecurityMethods.HashPassword(registerRequest.Password),
+                RegieId = registerRequest.RegieId,
                 Nom = registerRequest.Nom,
                 Prenom = registerRequest.Prenom,
                 DateDeNaissance = registerRequest.DateDeNaissance
@@ -48,7 +49,10 @@ public class AdministrateurRepository(
             var administrateur = await context.Administrateurs
                 .Where(a => a.Email == tokenGenerationRequest.Email 
                             && 
-                            a.PasswordHash == hashedPassword).FirstOrDefaultAsync();
+                            a.Password == hashedPassword
+                            &&
+                            a.RegieId == tokenGenerationRequest.RegieId
+                            ).FirstOrDefaultAsync();
             return administrateur is { CompteActif: true } ? administrateur : null;
         }
         catch (Exception exception)
