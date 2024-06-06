@@ -26,11 +26,7 @@ public class CompteurController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllCompteurs()
     {
-        IEnumerable<Compteur> compteurs = await _compteurRepository.GetAllAsync();
-        foreach (var compteur in compteurs)
-        {
-            compteur.ToCompteurDto();
-        }
+        IEnumerable<CompteurDto> compteurs = await _compteurRepository.GetAllAsync();
         return Ok(compteurs);
         
     }

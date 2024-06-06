@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GestionCompteursElectriquesMoyenneTension.Security.Controllers;
-
+[ApiController]
+[Route("api/[controller]")]
 public class IdentityController(
     IAdministrateurRepository administrateurRepository,
     IRegieRepository regieRepository

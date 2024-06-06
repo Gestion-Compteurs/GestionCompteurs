@@ -1,5 +1,7 @@
 ﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Cadran;
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Compteur;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
 using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 using GestionCompteursElectriquesMoyenneTension.Model.Mappers;
@@ -14,14 +16,30 @@ public class CompteurRepository:ICompteurRepository
         {
             _context = context;
         }
-        public async Task<List<Compteur>> GetAllAsync()
+        public async Task<List<CompteurDto>> GetAllAsync()
         {
-            return await _context.Compteurs.Include(c=>c.InstanceCompteurs).ToListAsync();
+            var compteurs = await _context.Compteurs.ToListAsync();
+
+            return compteurs.Select(compteur => new CompteurDto
+                {
+                    CompteurId = compteur.CompteurId,
+                    Modele = compteur.Modele,
+                    Marque = compteur.Marque,
+                    VoltageMax = compteur.VoltageMax,
+                    AnneeCreation = compteur.AnneeCreation,
+                    NombreCadrans = GetNumberOfCadrans(compteur.CompteurId)
+                })
+                .ToList();
         }
 
         public async Task<Compteur?> GetByIdAsync(int id)
         {
             return await _context.Compteurs.Include(c=>c.InstanceCompteurs).FirstOrDefaultAsync(x=>x.CompteurId==id);
+        }
+
+        public int GetNumberOfCadrans(int compteurId)
+        {
+            return _context.CompteurCadrans.Count(cc => cc.CompteurId == compteurId);
         }
 
         public async Task<Compteur> CreateAsync(Compteur compteurModel)

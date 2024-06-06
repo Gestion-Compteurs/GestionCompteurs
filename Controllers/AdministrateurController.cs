@@ -10,7 +10,7 @@ public class AdministrateurController(IAdministrateurRepository administrateurRe
 {
     private readonly IAdministrateurRepository _administrateurRepository = administrateurRepository;
 
-    [HttpPost("Register")]
+    [HttpPost("register")]
     public async Task<IActionResult> RegisterAdmin(
         [FromBody] RegisterRequest registerRequest
     )

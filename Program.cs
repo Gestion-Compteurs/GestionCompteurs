@@ -59,6 +59,7 @@ builder.Services.AddScoped<IInstanceCompteurRepository, InstanceCompteurReposito
 builder.Services.AddScoped<IInstanceCadranRepository, InstanceCadranRepository>();
 builder.Services.AddScoped<IReleveCadranRepository, ReleveCadranRepository>();
 builder.Services.AddScoped<IReleveRepository, ReleveRepository>();
+builder.Services.AddScoped<IOperateurRepository, OperateurRepository>();
 builder.Services.AddScoped<IAdministrateurRepository, AdministrateurRepository>();
 builder.Services.AddScoped<IRegieRepository, RegieRepository>();
 builder.Services.AddScoped<IPasswordHasher<Administrateur>, AdminPasswordHasher>();

@@ -1,7 +1,10 @@
-﻿using GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+﻿using GestionCompteursElectriquesMoyenneTension.Data;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs;
+using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Cadran;
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.Compteur;
 using GestionCompteursElectriquesMoyenneTension.Model.DTOs.InstanceCompteur;
 using GestionCompteursElectriquesMoyenneTension.Model.Entities;
+using GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 
 namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 
@@ -10,11 +13,16 @@ public static class CompteurMapper
     public static CompteurDto ToCompteurDto(this Compteur? compteurModel)
     {
         var instanceCompteurDtos = new List<InstanceCompteurDto>();
+        var typeCadranDtos = new List<CadranDto>();
         // var instanceCompteurDtos = compteurModel.InstanceCompteurs.Select(obj => obj.ToInstanceCompteurDto()).ToList(); // TODO test this
 
         foreach (var obj in compteurModel.InstanceCompteurs)
         {
             instanceCompteurDtos.Add(obj.ToInstanceCompteurDto());
+        }
+        foreach (var obj in compteurModel.TypesCadrans)
+        {
+            typeCadranDtos.Add(obj.ToCadranDto());
         }
         return new CompteurDto
         {
@@ -23,7 +31,8 @@ public static class CompteurMapper
             Marque = compteurModel.Marque,
             VoltageMax = compteurModel.VoltageMax,
             AnneeCreation = compteurModel.AnneeCreation,
-            InstanceCompteursDtos = instanceCompteurDtos
+            InstanceCompteurs = instanceCompteurDtos,
+            TypesCadrans = typeCadranDtos,
         };
     }
 

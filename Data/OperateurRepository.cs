@@ -24,7 +24,7 @@ public class OperateurRepository : IOperateurRepository
          
         public async Task<Operateur?> GetByIdAsync(int id)
         {
-            return await _context.Operateurs.Where(x=>x.OperateurId==id).FirstOrDefaultAsync();
+            return await _context.Operateurs.Where(x=>x.OperateurId==id).Include(o=>o.releves).FirstOrDefaultAsync();
         }
 
         public async Task<Operateur> CreateAsync(Operateur operateurModel)
