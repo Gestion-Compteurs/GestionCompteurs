@@ -12,6 +12,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
         public DateTime DateDeNaissance { get; set; }
         public string? Civilite { get; set; }= Constants.UnknownString;
         public DateTime DateEmbauche { get; set; }
+        public byte[]? Photo { get; set; }
         
     }
 

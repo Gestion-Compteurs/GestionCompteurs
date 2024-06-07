@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
 public class Operateur:Personne
@@ -12,4 +14,7 @@ public class Operateur:Personne
     public string? Civilite { get; set; } = string.Empty;
     // est ce qu'on a besoin de naviguer vers les relèves 
     public IEnumerable<Releve> releves { get; set; } = new List<Releve>();
+    public byte[]? Photo { get; set; }
+    [NotMapped]
+    public IFormFile? PhotoFile { get; set; }
 }

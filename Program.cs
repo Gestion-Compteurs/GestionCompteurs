@@ -17,7 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 */
 
 // Configurer l'injection de dépendances pour le contexte de la base de données
-var connectionString = builder.Configuration.GetConnectionString("sql_server_hassane");
+var connectionString = builder.Configuration.GetConnectionString("sql_server_nihad");
 builder.Services.AddSqlServer<ApplicationDbContext>(connectionString);
 var iServiceCollection = builder.Services;
 

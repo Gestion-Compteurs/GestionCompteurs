@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GestionCompteursElectriquesMoyenneTension.Migrations
 {
     /// <inheritdoc />
-    public partial class m1 : Migration
+    public partial class nihad5 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -208,6 +208,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                     DateEmbauche = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RegieId = table.Column<int>(type: "int", nullable: true),
                     Civilite = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Cin = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prenom = table.Column<string>(type: "nvarchar(max)", nullable: false),

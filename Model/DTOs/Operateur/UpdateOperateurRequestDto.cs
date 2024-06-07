@@ -24,7 +24,8 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
         [Required]
         public DateTime DateEmbauche { get; set; }
 
-        
+        [Required]
+        public IFormFile? PhotoFile { get; set; }
         
     }
 

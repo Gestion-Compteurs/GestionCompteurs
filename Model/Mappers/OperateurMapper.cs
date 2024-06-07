@@ -16,13 +16,14 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
                 CIN = operateurModel.Cin,
                 DateDeNaissance = operateurModel.DateDeNaissance,
                 Civilite = operateurModel.Civilite,
-                DateEmbauche = operateurModel.DateEmbauche
+                DateEmbauche = operateurModel.DateEmbauche,
+                Photo = operateurModel.Photo 
             };
         }
 
         public static Operateur ToOperateurFromCreateDto(this CreateOperateurRequestDto createOperateurDto)
         {
-            return new Operateur
+            var operateur = new Operateur
             {
                 Nom = createOperateurDto.Nom,
                 Prenom = createOperateurDto.Prenom,
@@ -32,11 +33,22 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
                 Civilite = createOperateurDto.Civilite,
                 DateEmbauche = createOperateurDto.DateEmbauche
             };
+
+            if (createOperateurDto.PhotoFile != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    createOperateurDto.PhotoFile.CopyTo(memoryStream);
+                    operateur.Photo = memoryStream.ToArray();  // Convertir IFormFile en byte[]
+                }
+            }
+
+            return operateur;
+            
         }
 
         public static Operateur UpdateOperateurFromUpdateDto(this Operateur operateurModel, UpdateOperateurRequestDto updateOperateurDto)
         {
-            
             operateurModel.Nom = updateOperateurDto.Nom;
             operateurModel.Prenom = updateOperateurDto.Prenom;
             operateurModel.Cin = updateOperateurDto.CIN;
@@ -44,6 +56,15 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
             operateurModel.DateDeNaissance = updateOperateurDto.DateDeNaissance;
             operateurModel.Civilite = updateOperateurDto.Civilite;
             operateurModel.DateEmbauche = updateOperateurDto.DateEmbauche;
+
+            if (updateOperateurDto.PhotoFile != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    updateOperateurDto.PhotoFile.CopyTo(memoryStream);
+                    operateurModel.Photo = memoryStream.ToArray();  // Convertir IFormFile en byte[]
+                }
+            }
 
             return operateurModel;
         }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionCompteursElectriquesMoyenneTension.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240528072517_m1")]
-    partial class m1
+    [Migration("20240606232505_nihad5")]
+    partial class nihad5
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -293,6 +293,9 @@ namespace GestionCompteursElectriquesMoyenneTension.Migrations
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Prenom")
                         .IsRequired()

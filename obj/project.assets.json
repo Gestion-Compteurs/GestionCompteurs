@@ -6839,19 +6839,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pc\\.nuget\\packages\\": {}
+    "C:\\Users\\EL-OTHEMANY\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj",
+      "projectUniqueName": "C:\\Users\\EL-OTHEMANY\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj",
       "projectName": "GestionCompteursElectriquesMoyenneTension",
-      "projectPath": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\GestionCompteursElectriquesMoyenneTension.csproj",
-      "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Mamane Hassane\\Somei\\GestionCompteursElectriquesMoyenneTension\\obj\\",
+      "projectPath": "C:\\Users\\EL-OTHEMANY\\GestionCompteurs\\GestionCompteursElectriquesMoyenneTension.csproj",
+      "packagesPath": "C:\\Users\\EL-OTHEMANY\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\EL-OTHEMANY\\GestionCompteurs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\EL-OTHEMANY\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6859,6 +6859,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6937,7 +6938,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

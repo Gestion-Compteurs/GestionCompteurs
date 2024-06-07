@@ -29,6 +29,16 @@ public class OperateurRepository : IOperateurRepository
 
         public async Task<Operateur> CreateAsync(Operateur operateurModel)
         {
+            
+            if (operateurModel.PhotoFile != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    operateurModel.PhotoFile.CopyTo(memoryStream);
+                    operateurModel.Photo = memoryStream.ToArray();
+                }
+            }
+            
             await _context.Operateurs.AddAsync(operateurModel);
             await _context.SaveChangesAsync();
             return operateurModel;
@@ -46,6 +56,14 @@ public class OperateurRepository : IOperateurRepository
             operateurModel.DateDeNaissance = updateDto.DateDeNaissance;
             operateurModel.Civilite=updateDto.Civilite;
             operateurModel.DateEmbauche=updateDto.DateEmbauche;
+            if (updateDto.PhotoFile != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    updateDto.PhotoFile.CopyTo(memoryStream);
+                    operateurModel.Photo = memoryStream.ToArray();
+                }
+            }
             await _context.SaveChangesAsync();
             return operateurModel;
         }
