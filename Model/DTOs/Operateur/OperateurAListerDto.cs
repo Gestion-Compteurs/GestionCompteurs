@@ -5,11 +5,12 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
 public class OperateurAListerDto
 {
     public int OperateurId { get; set; }
-    public string? Nom { get; set; }= Constants.UnknownString;
-    public string? Prenom { get; set; }= Constants.UnknownString;
+    public string? Nom { get; set; }= string.Empty;
+    public string? Prenom { get; set; }= string.Empty;
     public int? RegieId { get; set; }
-    public string? CIN { get; set; }= Constants.UnknownString;
+    public string? CIN { get; set; }= string.Empty;
     public DateTime DateDeNaissance { get; set; }
-    public string? Civilite { get; set; }= Constants.UnknownString;
+    public string? Civilite { get; set; }= string.Empty;
     public DateTime DateEmbauche { get; set; }
+    public string? Photo { get; set; }
 }

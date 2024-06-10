@@ -12,14 +12,14 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
     public class OperateurController : ControllerBase
     {
         private readonly IOperateurRepository _operateurRepository;
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
         private readonly ILogger<OperateurController> _logger;
 
         public OperateurController(IOperateurRepository operateurRepository, ApplicationDbContext context, ILogger<OperateurController> logger)
         {
             _operateurRepository = operateurRepository;
             _logger = logger;
-            _context = context;
+           // _context = context;
         }
 
         [HttpGet]
@@ -43,12 +43,25 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
         }
 
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> CreateOperateur([FromBody] CreateOperateurRequestDto operateurDto)
         {
-            var operateurModel = OperateurMapper.ToOperateurFromCreateDto(operateurDto); 
-            await _operateurRepository.CreateAsync(operateurModel);
-            return CreatedAtAction(nameof(GetOperateurById), new { id = operateurModel.OperateurId }, OperateurMapper.ToOperateurDto(operateurModel)); 
+            try
+            {
+                var operateurModel = OperateurMapper.ToOperateurFromCreateDto(operateurDto);
+                await _operateurRepository.CreateAsync(operateurModel);
+                var operateurResultDto = OperateurMapper.ToOperateurDto(operateurModel);
+                if (operateurResultDto is not null)
+                    return CreatedAtAction(nameof(GetOperateurById), new { id = operateurModel.OperateurId }, operateurResultDto);
+                return StatusCode(500);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError("Une erreur s'est produite pendant l'ajout de l'opérateur : " + exception.Message);
+                return StatusCode(500);
+            }
         }
+
         
         [HttpPut("{id:int:min(1)}")]
         public async Task<IActionResult> UpdateOperateur([FromRoute] int id, [FromBody] UpdateOperateurRequestDto updateDto)
@@ -58,6 +71,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Controllers;
                 return NotFound();
             return Ok(OperateurMapper.ToOperateurDto(operateurModel)); 
         }
+        
 
         [HttpDelete("{id:int:min(1)}")]
         public async Task<IActionResult> DeleteOperateur([FromRoute] int id)

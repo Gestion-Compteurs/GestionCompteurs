@@ -7,23 +7,24 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.DTOs.Operateur;
     public class UpdateOperateurRequestDto
     {
         [Required]
-        public string? Nom { get; set; }= Constants.UnknownString;
+        public string? Nom { get; set; }= string.Empty;
         [Required]
-        public string? Prenom { get; set; }= Constants.UnknownString;
+        public string? Prenom { get; set; }= string.Empty;
         [Required]
         public int? RegieId { get; set; }
         [Required]
-        public string? CIN { get; set; }= Constants.UnknownString;
+        public string? CIN { get; set; }= string.Empty;
 
         [Required]
         public DateTime DateDeNaissance { get; set; }
 
         [Required]
-        public string? Civilite { get; set; }= Constants.UnknownString;
+        public string? Civilite { get; set; }= string.Empty;
 
         [Required]
         public DateTime DateEmbauche { get; set; }
-
+        [Required]
+        public string? Photo { get; set; }
         
         
     }
