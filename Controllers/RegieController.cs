@@ -28,7 +28,7 @@ public class RegieController(IRegieRepository regieRepository) : ControllerBase
         }
     }
     
-    [HttpPost("UnlockAdministrateur/{administrateurId:int:min(0)}/{regieId:int:min(0)}")]
+    [HttpPut("UnlockAdministrateur/{administrateurId:int:min(0)}/{regieId:int:min(0)}")]
     public async Task<IActionResult> UnlockAdministrateur(
         [FromRoute] int administrateurId,
         [FromRoute] int regieId
@@ -37,12 +37,31 @@ public class RegieController(IRegieRepository regieRepository) : ControllerBase
         try
         {
             var adminUnlocked = await _regieRepository.UnlockAdministrateur(administrateurId, regieId);
-            if (adminUnlocked is true) return Ok("Administrateur débloqué avec succèes !");
+            if (adminUnlocked is true) return Ok(true);
             return StatusCode(StatusCodes.Status417ExpectationFailed);
         }
         catch (Exception exception)
         {
             Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de UnlockAdministrateur {exception}");
+            throw;
+        }
+    }
+    
+    [HttpPut("lockAdministrateur/{administrateurId:int:min(0)}/{regieId:int:min(0)}")]
+    public async Task<IActionResult> LockAdministrateur(
+        [FromRoute] int administrateurId,
+        [FromRoute] int regieId
+    )
+    {
+        try
+        {
+            var adminUnlocked = await _regieRepository.LockAdministrateur(administrateurId, regieId);
+            if (adminUnlocked is true) return Ok(true);
+            return StatusCode(StatusCodes.Status417ExpectationFailed);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine($"Une erreur s'est produite dans le contrôlleur de la régie au niveau de LockAdministrateur {exception}");
             throw;
         }
     }

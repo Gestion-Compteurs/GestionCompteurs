@@ -28,7 +28,6 @@ public class CompteurController : ControllerBase
     {
         IEnumerable<CompteurDto> compteurs = await _compteurRepository.GetAllAsync();
         return Ok(compteurs);
-        
     }
 
 

@@ -45,6 +45,25 @@ public class RegieRepository(
             throw;
         }
     }
+    
+    public async Task<bool?> LockAdministrateur(int administrateurId, int regieId)
+    {
+        try
+        {
+            var administrateur = await context.Administrateurs
+                .Where(a => a.AdminId == administrateurId)
+                .FirstOrDefaultAsync();
+            if (administrateur is null || administrateur.RegieId != regieId) return false;
+            administrateur.CompteActif = false;
+            await context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine($"Une erreur s'est produite dans le repository de la régie au niveau de LockAdministrateur {exception.Message}");
+            throw;
+        }
+    }
 
     public async Task<IEnumerable<Administrateur?>?> ListAllAdministrateurs(int regieId)
     {
