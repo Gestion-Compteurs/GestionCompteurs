@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GestionCompteursElectriquesMoyenneTension.Model.Entities;
 
@@ -15,6 +16,9 @@ public class Compteur
     //public IEnumerable<InstanceCadran> Cadrans { get; set; } = new List<InstanceCadran>();
     public IEnumerable<Cadran> TypesCadrans { get; set; } = new List<Cadran>();
     public IEnumerable<InstanceCompteur> InstanceCompteurs { get; set; } = new List<InstanceCompteur>();
+    public string? Photo { get; set; } = string.Empty;
+    [NotMapped]
+    public IFormFile ImageFile { get; set; }
 
     /*
      Deplacer vers le controlleur

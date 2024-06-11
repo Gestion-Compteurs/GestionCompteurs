@@ -13,4 +13,5 @@ public class CompteurDto
     public IEnumerable<InstanceCompteurDto> InstanceCompteurs { get; set; } = new List<InstanceCompteurDto>();
     public IEnumerable<CadranDto> TypesCadrans { get; set; } = new List<CadranDto>();
     public int NombreCadrans { get; set; }
+    public string? Photo { get; set; }
 }

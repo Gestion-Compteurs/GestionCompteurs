@@ -33,6 +33,7 @@ public static class CompteurMapper
             AnneeCreation = compteurModel.AnneeCreation,
             InstanceCompteurs = instanceCompteurDtos,
             TypesCadrans = typeCadranDtos,
+            Photo = compteurModel.Photo,
         };
     }
 
@@ -45,6 +46,7 @@ public static class CompteurMapper
             Marque = compteurDto.Marque,
             VoltageMax = compteurDto.VoltageMax,
             AnneeCreation = compteurDto.AnneeCreation,
+            Photo = compteurDto.Photo,
         };
     }
 
@@ -59,6 +61,7 @@ public static class CompteurMapper
             Modele = ajouterCompteurRequestDto.Modele,
             AnneeCreation = ajouterCompteurRequestDto.AnneeCreation,
             VoltageMax = ajouterCompteurRequestDto.VoltageMax,
+            Photo = ajouterCompteurRequestDto.Photo,
             // TypesCadrans = typesCadransARenseigner,
         };
     }

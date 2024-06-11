@@ -6,4 +6,5 @@ public class UpdateCompteurRequestDto
     public string Modele { get; set; } = string.Empty;
     public int AnneeCreation { get; set; } = 0;
     public int VoltageMax { get; set; } = 0;
+    public string? Photo { get; set; }
 }
