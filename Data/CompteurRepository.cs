@@ -27,6 +27,7 @@ public class CompteurRepository:ICompteurRepository
                     Marque = compteur.Marque,
                     VoltageMax = compteur.VoltageMax,
                     AnneeCreation = compteur.AnneeCreation,
+                    Photo= compteur.Photo,
                     NombreCadrans = GetNumberOfCadrans(compteur.CompteurId)
                 })
                 .ToList();
@@ -57,6 +58,7 @@ public class CompteurRepository:ICompteurRepository
             compteurModel.Modele = updateDto.Modele;
             compteurModel.AnneeCreation = updateDto.AnneeCreation;
             compteurModel.VoltageMax = updateDto.VoltageMax;
+            compteurModel.Photo = updateDto.Photo;
         
             await _context.SaveChangesAsync();
             return compteurModel;

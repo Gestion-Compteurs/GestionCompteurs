@@ -13,6 +13,9 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
         Task<Operateur?> UpdateAsync(int id, UpdateOperateurRequestDto operateurModel);
         Task<Operateur?> DeleteAsync(int id);
         Task<bool> OperateurExists(int id);
+        
+        
+        
     }
 
 

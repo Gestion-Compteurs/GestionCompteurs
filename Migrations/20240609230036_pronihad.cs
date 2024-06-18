@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GestionCompteursElectriquesMoyenneTension.Migrations
 {
     /// <inheritdoc />
-    public partial class m1 : Migration
+    public partial class pronihad : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

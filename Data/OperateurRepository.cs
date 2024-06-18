@@ -43,9 +43,11 @@ public class OperateurRepository : IOperateurRepository
             operateurModel.Nom = updateDto.Nom;
             operateurModel.Prenom = updateDto.Prenom;
             operateurModel.Cin = updateDto.CIN;
+            operateurModel.RegieId = updateDto.RegieId;
             operateurModel.DateDeNaissance = updateDto.DateDeNaissance;
             operateurModel.Civilite=updateDto.Civilite;
             operateurModel.DateEmbauche=updateDto.DateEmbauche;
+            operateurModel.Photo = updateDto.Photo;
             await _context.SaveChangesAsync();
             return operateurModel;
         }
