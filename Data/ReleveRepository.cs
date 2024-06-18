@@ -33,7 +33,7 @@ public class ReleveRepository(ApplicationDbContext context): IReleveRepository
                 // Ajout dans la liste des relèves de son instance compteur
                 InstanceCompteurId = instanceCompteur.InstanceCompteurId,
                 DateReleve = DateOnly.FromDateTime(DateTime.Today),
-                // L'identifiant de l'opérateur sera ajouté lors de la confirmation
+                OperateurId = ajouterNouvelleReleveRequestDto.OperateurId,
             };
             await _context.Releves.AddAsync(releve);
             await _context.SaveChangesAsync();

@@ -106,7 +106,9 @@ public class ReleveController(
     {
         try
         {
-            return Ok(await _releveRepository.ConfirmerCreationNouvelleReleve(confirmerCreationNouvelleReleveRequestDto));
+            var nouvelleReleve =
+                await _releveRepository.ConfirmerCreationNouvelleReleve(confirmerCreationNouvelleReleveRequestDto);
+            return Ok(nouvelleReleve);
         }
         catch (Exception exception)
         {
