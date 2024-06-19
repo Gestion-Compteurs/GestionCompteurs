@@ -118,7 +118,24 @@ public class InstanceCompteurController:ControllerBase
         }
     }
     
-    // Ajouter une relève à une instance compteur
-    
-    
+    // TODO : Supprimer une instance compteur
+    [HttpDelete("SupprimerInstanceCompteur/{idInstanceCompteur:int:min(0)}")]
+    public async Task<IActionResult> SupprimerInstanceCompteur(int idInstanceCompteur)
+    {
+        try
+        {
+            var deleted = await _instanceCompteurRepository.SupprimerInstanceCompteur(idInstanceCompteur);
+            if (deleted is true)
+            {
+                return Ok($"L'instance compteur avec l'identifiant {idInstanceCompteur} à été supprimée avec succès.");
+            }
+            return NotFound(
+                $"L'instance compteur avec l'identifiant {idInstanceCompteur} n'existe pas dans la base de données");
+        }
+        catch (Exception exception)
+        {
+            _logger.LogInformation("Une erreur s'est produite lors de la suppression de l'instance compteur" + exception.Message);
+            return StatusCode(500);
+        }
+    }
 }

@@ -14,4 +14,5 @@ public interface IInstanceCompteurRepository
 
     //Task<InstanceCompteur?> CreateInstanceCadranAsync(InstanceCadran commentModel);
 
+    Task<bool> SupprimerInstanceCompteur(int idInstanceCompteur);
 }

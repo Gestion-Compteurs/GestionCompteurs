@@ -56,6 +56,51 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
         }
     }
 
+    // TODO : Ajouter au front-end
+    public async Task<bool> SupprimerInstanceCompteur(int idInstanceCompteur)
+    {
+        // Retrouver l'instance compteur concernée
+        var instanceCompteurConcernee = await _context.InstanceCompteurs
+            .Where(i => i.InstanceCompteurId == idInstanceCompteur)
+            .Include(i => i.InstanceCadrans)
+            .Include(i => i.Releves)
+            .FirstOrDefaultAsync();
+        // Si elle n'existe pas, retourner false
+        if (instanceCompteurConcernee is null) return false;
+        // Sinon si elle existe
+        // Retrouver toutes ses instances cadrans et les supprimer une à une
+        foreach (var instanceCompteur in instanceCompteurConcernee.InstanceCadrans)
+        {
+            // Pour l'instance cadran concernée, on supprime toutes les relèves cadrans
+            var instanceCadranConcernee = await _context.InstanceCadrans
+                .Where(ic => ic.InstanceCompteurId == instanceCompteur.InstanceCadranId)
+                .Include(ic => ic.ReleveCadrans)
+                .FirstOrDefaultAsync();
+            foreach (var releveCadran in instanceCadranConcernee.ReleveCadrans)
+            {
+                _context
+                    .ReleveCadrans
+                    .Where(rc => rc.ReleveCadranId == releveCadran.ReleveCadranId)
+                    .ExecuteDelete();
+            }
+            // Supprimer toutes les relèves concernées
+            foreach (var releve in instanceCompteurConcernee.Releves)
+            {
+                _context
+                    .Releves
+                    .Where(r => r.ReleveId == releve.ReleveId)
+                    .ExecuteDelete();
+            }
+        }
+        // Supprimer l'instance compteur concernée
+        var deletedRows = _context
+            .InstanceCompteurs
+            .Where(ic => ic.InstanceCompteurId == idInstanceCompteur)
+            .ExecuteDelete();
+        // Retouner true ou false
+        return deletedRows > 0 ;
+    }
+
     /*public async Task<InstanceCompteur?> CreateInstanceCadranAsync(InstanceCadran commentModel)
     {
         throw new NotImplementedException();
