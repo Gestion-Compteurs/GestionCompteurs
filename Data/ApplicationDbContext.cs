@@ -12,7 +12,7 @@ public class ApplicationDbContext:IdentityDbContext<Administrateur>
     public DbSet<InstanceCompteur> InstanceCompteurs { get; set; }
     public DbSet<InstanceCadran> InstanceCadrans{ get; set; }
     public DbSet<Cadran> Cadrans { get; set; }
-    public DbSet<Batiment> Batiments { get; set; }
+    public DbSet<Batiment?> Batiments { get; set; }
     public DbSet<ReleveCadran> ReleveCadrans { get; set; }
     public DbSet<Releve> Releves { get; set; }
     public DbSet<CompteurCadran> CompteurCadrans { get; set; }

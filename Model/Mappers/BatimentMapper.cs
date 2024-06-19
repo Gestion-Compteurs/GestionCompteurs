@@ -5,7 +5,7 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Mappers;
 
 public static class BatimentMapper
 {
-    public static BatimentDto ToBatimentDto(this Batiment batimentModel)
+    public static BatimentDto ToBatimentDto(this Batiment? batimentModel)
     {
         var instanceCompteurDtosAMettre = batimentModel.InstanceCompteurs.Select(instanceCompteurDto => instanceCompteurDto.ToInstanceCompteurDto()).ToList();
         return new BatimentDto
@@ -19,7 +19,7 @@ public static class BatimentMapper
         };
     }
 
-    public static Batiment ToBatimentFromCreateDto(this CreateBatimentRequestDto batimentDto)
+    public static Batiment? ToBatimentFromCreateDto(this CreateBatimentRequestDto batimentDto)
     {
         return new Batiment
         {

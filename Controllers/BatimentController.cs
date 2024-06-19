@@ -23,7 +23,7 @@ public class BatimentController(
     [HttpGet]
     public async Task<IActionResult> GetAllBatiments()
     {
-        IEnumerable<Batiment> batiments = await _batimentRepository.GetAllAsync();
+        IEnumerable<Batiment?> batiments = await _batimentRepository.GetAllAsync();
         foreach (var batiment in batiments)
         {
             batiment.ToBatimentDto();
@@ -113,7 +113,8 @@ public class BatimentController(
         try
         {
             var batiment = await _batimentRepository.AjouterInstanceCompteur(ajouterInstanceCompteurRequestDto);
-            return Ok(batiment.ToBatimentDto());
+            if (batiment != null) return Ok(batiment.ToBatimentDto());
+            return StatusCode(StatusCodes.Status417ExpectationFailed);
         }
         catch (Exception exception)
         {
@@ -129,15 +130,15 @@ public class BatimentController(
         )
     {
        try
-        {
-            var batiment = await _batimentRepository.RetrouverInstancesCompteurs(idBatiment);
-            return Ok(batiment.ToBatimentDto());
-        }
-        catch (Exception exception)
-        {
-            _logger.LogError("Une erreur s'est produite pendant la recherche des instances compteurs " + exception.Message);
-            return StatusCode(500);
-        }
+       {
+           var batiment = await _batimentRepository.RetrouverInstancesCompteurs(idBatiment);
+           return Ok(batiment.ToBatimentDto());
+       }
+       catch (Exception exception)
+       {
+           _logger.LogError("Une erreur s'est produite pendant la recherche des instances compteurs " + exception.Message);
+           return StatusCode(500);
+       }
     }
     
 }

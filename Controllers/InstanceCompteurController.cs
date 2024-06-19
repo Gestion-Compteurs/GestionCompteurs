@@ -127,7 +127,7 @@ public class InstanceCompteurController:ControllerBase
             var deleted = await _instanceCompteurRepository.SupprimerInstanceCompteur(idInstanceCompteur);
             if (deleted is true)
             {
-                return Ok($"L'instance compteur avec l'identifiant {idInstanceCompteur} à été supprimée avec succès.");
+                return Ok(true);
             }
             return NotFound(
                 $"L'instance compteur avec l'identifiant {idInstanceCompteur} n'existe pas dans la base de données");

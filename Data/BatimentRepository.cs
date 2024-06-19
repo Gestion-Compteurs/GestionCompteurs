@@ -12,7 +12,7 @@ public class BatimentRepository:IBatimentRepository
     {
         _context = context;
     }
-    public async Task<List<Batiment>> GetAllAsync()
+    public async Task<List<Batiment?>> GetAllAsync()
     {
         return await _context.Batiments.ToListAsync();
     }
@@ -22,7 +22,7 @@ public class BatimentRepository:IBatimentRepository
         return await _context.Batiments.FirstOrDefaultAsync(x=>x.BatimentId==id);
     }
 
-    public async Task<Batiment> CreateAsync(Batiment batimentModel)
+    public async Task<Batiment?> CreateAsync(Batiment? batimentModel)
     {
         await _context.Batiments.AddAsync(batimentModel);
         await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ public class BatimentRepository:IBatimentRepository
                     CadranId = typeCadran.CadranId, // La clé étrangère du type de cadran
                     IndexRoues = 0, // Pas encore utilisé
                     // Si l'id n'est pas disponible, je vais faire un SaveChangesAsync puis un FirstOrDefaultAsync
-                    InstanceCompteurId = instanceCompteur.CompteurId, // La clé etrangère du type de compteur
+                    InstanceCompteurId = instanceCompteur.InstanceCompteurId, // La clé etrangère du type de compteur
                 };
                 await _context.InstanceCadrans.AddAsync(instanceCadran);
                 await _context.SaveChangesAsync();

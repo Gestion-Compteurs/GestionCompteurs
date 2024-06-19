@@ -6,9 +6,9 @@ namespace GestionCompteursElectriquesMoyenneTension.Model.Interfaces;
 
 public interface IBatimentRepository
 {
-    Task<List<Batiment>> GetAllAsync();
+    Task<List<Batiment?>> GetAllAsync();
     Task<Batiment?> GetByIdAsync(int id);
-    Task<Batiment> CreateAsync(Batiment batimentModel);
+    Task<Batiment?> CreateAsync(Batiment? batimentModel);
     Task<Batiment?> UpdateAsync(int id,UpdateBatimentRequestDto batimentModel);
     Task<bool> DeleteAsync(int id);
     Task<bool> BatimentExists(int id);
