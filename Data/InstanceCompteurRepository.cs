@@ -70,16 +70,17 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
         // Si elle n'existe pas, retourner false
         if (instanceCompteurConcernee is null) return false;
         // Sinon si elle existe
-        // Supprimer toutes ses instances cadrans concernées
-        await _context
-                .InstanceCadrans
-                .Where(ic => ic.InstanceCompteurId == instanceCompteurConcernee.InstanceCompteurId)
-                .ExecuteDeleteAsync();
+        
         // Supprimer toutes les relèves et relèves cadrans concernées
         foreach (var releve in instanceCompteurConcernee.Releves)
         {
             await _releveRepository.DeleteReleve(releve.ReleveId);
         }
+        // Supprimer toutes ses instances cadrans concernées
+        await _context
+            .InstanceCadrans
+            .Where(ic => ic.InstanceCompteurId == instanceCompteurConcernee.InstanceCompteurId)
+            .ExecuteDeleteAsync();
         // Supprimer l'instance compteur concernée
         var deletedRows = _context
             .InstanceCompteurs
