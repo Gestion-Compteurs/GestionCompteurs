@@ -7,9 +7,11 @@ namespace GestionCompteursElectriquesMoyenneTension.Data;
 public class InstanceCompteurRepository:IInstanceCompteurRepository
 {
     private readonly ApplicationDbContext _context;
-    public InstanceCompteurRepository(ApplicationDbContext context)
+    private readonly IReleveRepository _releveRepository;
+    public InstanceCompteurRepository(ApplicationDbContext context, IReleveRepository releveRepository)
     {
         _context = context;
+        _releveRepository = releveRepository;
     }
     
     public async Task<List<InstanceCompteur>> GetAllAsync()
@@ -68,29 +70,15 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
         // Si elle n'existe pas, retourner false
         if (instanceCompteurConcernee is null) return false;
         // Sinon si elle existe
-        // Retrouver toutes ses instances cadrans et les supprimer une à une
-        foreach (var instanceCompteur in instanceCompteurConcernee.InstanceCadrans)
+        // Supprimer toutes ses instances cadrans concernées
+        await _context
+                .InstanceCadrans
+                .Where(ic => ic.InstanceCompteurId == instanceCompteurConcernee.InstanceCompteurId)
+                .ExecuteDeleteAsync();
+        // Supprimer toutes les relèves et relèves cadrans concernées
+        foreach (var releve in instanceCompteurConcernee.Releves)
         {
-            // Pour l'instance cadran concernée, on supprime toutes les relèves cadrans
-            var instanceCadranConcernee = await _context.InstanceCadrans
-                .Where(ic => ic.InstanceCompteurId == instanceCompteur.InstanceCadranId)
-                .Include(ic => ic.ReleveCadrans)
-                .FirstOrDefaultAsync();
-            foreach (var releveCadran in instanceCadranConcernee.ReleveCadrans)
-            {
-                _context
-                    .ReleveCadrans
-                    .Where(rc => rc.ReleveCadranId == releveCadran.ReleveCadranId)
-                    .ExecuteDelete();
-            }
-            // Supprimer toutes les relèves concernées
-            foreach (var releve in instanceCompteurConcernee.Releves)
-            {
-                _context
-                    .Releves
-                    .Where(r => r.ReleveId == releve.ReleveId)
-                    .ExecuteDelete();
-            }
+            await _releveRepository.DeleteReleve(releve.ReleveId);
         }
         // Supprimer l'instance compteur concernée
         var deletedRows = _context
@@ -100,7 +88,7 @@ public class InstanceCompteurRepository:IInstanceCompteurRepository
         // Retouner true ou false
         return deletedRows > 0 ;
     }
-
+    
     /*public async Task<InstanceCompteur?> CreateInstanceCadranAsync(InstanceCadran commentModel)
     {
         throw new NotImplementedException();
